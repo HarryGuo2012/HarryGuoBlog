@@ -197,7 +197,27 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/HarryGuoBlog/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/HarryGuoBlog/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
           </a>
         </li>
       
@@ -207,7 +227,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -240,6 +260,151 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2016/02/12/最短路算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/HarryGuoBlog/2016/02/12/最短路算法/" itemprop="url">
+                  最短路算法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-12T21:07:25+08:00">
+                2016-02-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/算法讲解/" itemprop="url" rel="index">
+                    <span itemprop="name">算法讲解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="单源最短路"><a href="#单源最短路" class="headerlink" title="单源最短路"></a>单源最短路</h1><p>单源最短路的意思就是一个起点，算出到其他点的最短路，这里介绍三种算法，bellman-ford，spfa和dijkstra</p>
+<h2 id="BF算法"><a href="#BF算法" class="headerlink" title="BF算法"></a>BF算法</h2><h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><p>BF是bellman_ford的简称，算法的想法非常简单，进行$|V|-1$次操作，每次操作对所有的边松弛。<br>松弛可以形象的理解为更新值，比如有一条从$u$到$v$的边，如果$u$上的值加上边的长度小于$v$上的值，那么就更新$v$上的值。<br>为什么这样做是对的呢？我们可以回顾整个过程，第一次操作，我们一定能将起点出去的点中的某一个点更新为最小值（这个点以后不会被更新），关于这点可以用反证法证明，如果没有一个点是更新完毕的，那么从起点到这个点必然存在一条比起点到这个点的边更短的路径，与假设矛盾。故而每次我们至少能确定一个点，所以总共需要$|V|-1$次（起点不用更新）。<br>最开始的图，0是起点<br><img src="/HarryGuoBlog/images/最短路/1.jpg" alt=""><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/HarryGuoBlog/2016/02/12/最短路算法/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -287,7 +452,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-25T10:16:08+08:00">
                 2016-01-25
@@ -308,7 +473,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -437,7 +602,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-25T00:06:17+08:00">
                 2016-01-25
@@ -458,7 +623,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -505,7 +670,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2016/01/25/2016Camp之旅/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -584,7 +749,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-23T23:01:50+08:00">
                 2016-01-23
@@ -605,7 +770,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -651,7 +816,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2016/01/23/乘法逆元/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -730,7 +895,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-22T16:42:23+08:00">
                 2016-01-22
@@ -751,7 +916,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -795,7 +960,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2016/01/22/线段树讲解二/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -874,7 +1039,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-18T01:15:09+08:00">
                 2015-12-18
@@ -895,7 +1060,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1025,7 +1190,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-15T16:24:55+08:00">
                 2015-12-15
@@ -1046,7 +1211,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1090,7 +1255,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2015/12/15/线段树讲解一/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -1169,7 +1334,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-12T15:25:27+08:00">
                 2015-12-12
@@ -1190,7 +1355,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1236,7 +1401,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2015/12/12/第七届ACM趣味程序设计竞赛第三场（正式赛）/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -1315,7 +1480,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-11T12:03:10+08:00">
                 2015-12-11
@@ -1336,7 +1501,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1383,7 +1548,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2015/12/11/Codeforces-335-div2/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -1462,7 +1627,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-11T00:01:09+08:00">
                 2015-12-11
@@ -1483,7 +1648,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">In</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1530,150 +1695,6 @@
 <h1 id="和此题的关系"><a href="#和此题的关系" class="headerlink" title="和此题的关系"></a>和此题的关系</h1><p>此题中抽中神卡，就和球消失一样，并没有影响魔卡。所以我们能得出，神卡在这个游戏中并没有什么卵用。所以这个游戏只和魔卡有关系。</p>
 <h2 id="如果-m-是奇数"><a href="#如果-m-是奇数" class="headerlink" title="如果$m$是奇数"></a>如果$m$是奇数</h2><p>很明显，无论怎样都会留下奇数张的魔卡，那么方块A必死。</p>
 <h2 id="如果-m-是偶数"><a href="#如果-m-是偶数" class="headerlink" title="如果$m$是偶数"></a>如果$m$是偶数</h2><p>这时候如果要让方片A活下来，那么方片A必须最后被抽走。我们可以把魔卡排成一排，然后将方片A插入，如果方片A要活下来，当且仅当方片A在最后，而插入的总可能性有$m+1$种，所以最后的概率的倒数就是$m+1$</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2015/12/09/判断素数及分解质因数/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Harry Guo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HarryGuo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/HarryGuoBlog/2015/12/09/判断素数及分解质因数/" itemprop="url">
-                  判断素数及分解质因数
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-09T20:45:22+08:00">
-                2015-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/HarryGuoBlog/categories/ACM/" itemprop="url" rel="index">
-                    <span itemprop="name">ACM</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="如何判断一个数是否是素数"><a href="#如何判断一个数是否是素数" class="headerlink" title="如何判断一个数是否是素数"></a>如何判断一个数是否是素数</h1><h2 id="O-sqrt-n-的朴素算法"><a href="#O-sqrt-n-的朴素算法" class="headerlink" title="$O(\sqrt{n})$的朴素算法"></a>$O(\sqrt{n})$的朴素算法</h2><p>自然，一个数是素数，则不应该存在一个数能整除它，而一个数$n$的所有因子都是关于$\sqrt{n}$对称分布的，所以只用检测$[1,\sqrt{n}]$的范围内是否有这个数的因子即可。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(n&lt;=<span class="number">1</span>)<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i*i&lt;=n;i++)</div><div class="line">		<span class="keyword">if</span>(n%i==<span class="number">0</span>)</div><div class="line">			<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">	<span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="埃氏筛法"><a href="#埃氏筛法" class="headerlink" title="埃氏筛法"></a>埃氏筛法</h2><p>讲起来很麻烦，所以给个wiki的<a href="https://zh.wikipedia.org/wiki/%E5%9F%83%E6%8B%89%E6%89%98%E6%96%AF%E7%89%B9%E5%B0%BC%E7%AD%9B%E6%B3%95" target="_blank" rel="external">链接</a>。<br>这是一个$O(nloglogn)$的算法，算是非常快的了（其实还能去掉一个log，不过效果不明显）<br>由埃氏筛法的想法，我们先去掉某个素数的倍数再来判断即可。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">bool</span> isPrime[MAX_N];</div><div class="line"><span class="keyword">int</span> allPrime[MAX_N],tot=<span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPrime</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="built_in">memset</span>(isPrime,<span class="number">1</span>,<span class="keyword">sizeof</span>(isPrime));</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;MAX_N;i++)&#123;</div><div class="line">		<span class="keyword">if</span>(!isPrime[i])<span class="keyword">continue</span>;</div><div class="line">		allPrime[tot++]=i;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">2</span>*i;j&lt;MAX_N;j+=i)</div><div class="line">			isPrime[j]=<span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="米勒-拉宾素性检验"><a href="#米勒-拉宾素性检验" class="headerlink" title="米勒-拉宾素性检验"></a>米勒-拉宾素性检验</h2><p>这是个很奇怪的算法，大家可以不学，此算法用的是一种概率的方式来猜测一个数是不是素数，一般不会出错。还是给个wiki的<a href="https://zh.wikipedia.org/wiki/米勒-拉宾检验" target="_blank" rel="external">链接</a>。<br>代码就不给出了</p>
-<hr>
-<h1 id="如何分解质因数"><a href="#如何分解质因数" class="headerlink" title="如何分解质因数"></a>如何分解质因数</h1><p>大家小学都学过短除法，现在就只需要用程序来模拟短除法的过程即可。<br>由于短除法需要遍历素数，所以先用埃氏筛法把素数存起来是很方便的。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> allFac[MAX_N],facNum=<span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">getFac</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</div><div class="line">	<span class="keyword">while</span>(x&gt;<span class="number">1</span>)&#123;</div><div class="line">		<span class="keyword">if</span>(x%allPrime[i]==<span class="number">0</span>)&#123;</div><div class="line">			x/=allPrime[i];</div><div class="line">			allFac[facNum++]=allPrime[i];</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> i++;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
           
         
@@ -1754,26 +1775,26 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/HarryGuoBlog/archives">
-                <span class="site-state-item-count">46</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
 
           
             <div class="site-state-item site-state-categories">
-              
+              <a href="/HarryGuoBlog/categories">
                 <span class="site-state-item-count">6</span>
-                <span class="site-state-item-name">Kategorien</span>
-              
+                <span class="site-state-item-name">categories</span>
+              </a>
             </div>
           
 
           
             <div class="site-state-item site-state-tags">
               <a href="/HarryGuoBlog/tags">
-                <span class="site-state-item-count">30</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">tags</span>
               </a>
             </div>
           
@@ -1866,7 +1887,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
