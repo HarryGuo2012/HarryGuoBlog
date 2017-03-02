@@ -1,0 +1,727 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="线段树," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="概述《线段树讲解一》讲解了单点更新区间查询的线段树，现在给出一种更普适的线段树，支持区间更新区间查询。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线段树讲解二">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2016/01/22/线段树讲解二/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="概述《线段树讲解一》讲解了单点更新区间查询的线段树，现在给出一种更普适的线段树，支持区间更新区间查询。">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/线段树/4.png">
+<meta property="og:updated_time" content="2017-03-02T04:59:26.172Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线段树讲解二">
+<meta name="twitter:description" content="概述《线段树讲解一》讲解了单点更新区间查询的线段树，现在给出一种更普适的线段树，支持区间更新区间查询。">
+<meta name="twitter:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/线段树/4.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2016/01/22/线段树讲解二/"/>
+
+
+
+
+
+  <title> 线段树讲解二 | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2016/01/22/线段树讲解二/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                线段树讲解二
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-22T16:42:23+08:00">
+                2016-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/算法讲解/" itemprop="url" rel="index">
+                    <span itemprop="name">算法讲解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><a href="http://harryguo.me/2015/12/15/%E7%BA%BF%E6%AE%B5%E6%A0%91%E8%AE%B2%E8%A7%A3%E4%B8%80/" target="_blank" rel="external">《线段树讲解一》</a>讲解了单点更新区间查询的线段树，现在给出一种更普适的线段树，支持区间更新区间查询。<br><a id="more"></a></p>
+<hr>
+<h1 id="不同做法"><a href="#不同做法" class="headerlink" title="不同做法"></a>不同做法</h1><h2 id="使用单点更新"><a href="#使用单点更新" class="headerlink" title="使用单点更新"></a>使用单点更新</h2><p>如果我们用单点更新来模拟区间更新，容易知道，每更新一个点虽然很快，但是更新整个区间确实十分费时间的一件事。更一般的，每次更新的复杂度是$O(nlogn)$，无法达到快速应答的需求。</p>
+<h2 id="懒操作"><a href="#懒操作" class="headerlink" title="懒操作"></a>懒操作</h2><p>懒操作是线段树的核心操作，这是线段树之所以是log级算法的原因。我们可以注意到，对于线段树上的一个节点，如果我们更新的区间已经完全覆盖了这个区间，那么我们就没必要把这个节点的子节点都更新了，如果我们询问到这个节点的时候，我们再将堆积在这里的信息往下传。<br>这样操作的复杂度很明显是$O(logn)$的。<br><img src="/HarryGuoBlog/images/线段树/4.png" alt=""><br>如同上图中，我们试图更新$[3,7]$的区间，注意到$[4,7]$是整个节点，所以我们只需将信息保存在$[4,7]$的节点上，当我们需要知道$[4,7]$节点以下信息的时候，再将信息往下传即可。</p>
+<hr>
+<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><p>结构和单点更新类似，只是多了一个懒操作的标记，我们用区间增加某个值，区间询问最大值的线段树来举例子。</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">int N;</div><div class="line"></div><div class="line">struct SegmentTree&#123;</div><div class="line">	#define lchild l,m,v&lt;&lt;1</div><div class="line">	#define rchild m+1,r,v&lt;&lt;1|1</div><div class="line">	struct Node&#123;</div><div class="line">		int maxVal,lazy;</div><div class="line">	&#125;Tree[MAX_N*4];</div><div class="line"></div><div class="line">	void build()&#123;</div><div class="line">		for(int i=0;i&lt;MAX_N*4;i++)</div><div class="line">			Tree[i].maxVal=Tree[i].lazy=0;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	void pushDown(int v)&#123;</div><div class="line">		Tree[v&lt;&lt;1].maxVal+=Tree[v].lazy;</div><div class="line">		Tree[v&lt;&lt;1|1].maxVal+=Tree[v].lazy;</div><div class="line">		Tree[v&lt;&lt;1].lazy+=Tree[v].lazy;</div><div class="line">		Tree[v&lt;&lt;1|1].lazy+=Tree[v].lazy;</div><div class="line">		Tree[v].lazy=0;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	void pushUp(int v)&#123;</div><div class="line">		Tree[v].maxVal=max(Tree[v&lt;&lt;1].maxVal,Tree[v&lt;&lt;1|1].maxVal);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	void update(int a,int b,int x,int l=1,int r=N,int v=1)&#123;</div><div class="line">		if(a&lt;=l&amp;&amp;r&lt;=b)&#123;</div><div class="line">			Tree[v].lazy+=x;</div><div class="line">			Tree[v].maxVal+=x;</div><div class="line">			return;</div><div class="line">		&#125;</div><div class="line">		if(Tree[v].lazy)pushDown(v);</div><div class="line">		int m=(l+r)&gt;&gt;1;</div><div class="line">		if(a&lt;=m)update(a,b,x,lchild);</div><div class="line">		if(b&gt;m)update(a,b,x,rchild);</div><div class="line">		pushUp(v);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	int query(int a,int b,int l=1,int r=N,int v=1)&#123;</div><div class="line">		if(a&lt;=l&amp;&amp;r&lt;=b)</div><div class="line">			return Tree[v].maxVal;</div><div class="line">		int m=(l+r)&gt;&gt;1;</div><div class="line">		int res=0;</div><div class="line">		pushDown(v);</div><div class="line">		if(a&lt;=m)res=max(res,query(a,b,lchild));</div><div class="line">		if(b&gt;m)res=max(res,query(a,b,rchild));</div><div class="line">		return res;</div><div class="line">	&#125;</div><div class="line">&#125;seg;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/线段树/" rel="tag"># 线段树</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/12/18/CDOJ-1260-火火柴棍数字（二）/" rel="next" title="CDOJ 1260 火火柴棍数字（二）">
+                <i class="fa fa-chevron-left"></i> CDOJ 1260 火火柴棍数字（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2016/01/23/乘法逆元/" rel="prev" title="乘法逆元">
+                乘法逆元 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不同做法"><span class="nav-number">2.</span> <span class="nav-text">不同做法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用单点更新"><span class="nav-number">2.1.</span> <span class="nav-text">使用单点更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#懒操作"><span class="nav-number">2.2.</span> <span class="nav-text">懒操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本操作"><span class="nav-number">3.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#结构"><span class="nav-number">3.1.</span> <span class="nav-text">结构</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

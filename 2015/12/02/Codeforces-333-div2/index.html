@@ -1,0 +1,753 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="模拟,二分,RMQ,spfa," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="代码：https://github.com/HarryGuo2012/ACMCode/tree/worldLine/Codeforces/%23333(Div%202)
+
+Two Bases题意：给你两个不同进制的数，让你比较大小。
+题解：直接转换到十进制比较就好。
+
+Approximating a Constant Range题意：给你一个序列，这个序列中相邻的元素之间的差值不超过1，求一个最长">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces #333 div2">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2015/12/02/Codeforces-333-div2/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="代码：https://github.com/HarryGuo2012/ACMCode/tree/worldLine/Codeforces/%23333(Div%202)
+
+Two Bases题意：给你两个不同进制的数，让你比较大小。
+题解：直接转换到十进制比较就好。
+
+Approximating a Constant Range题意：给你一个序列，这个序列中相邻的元素之间的差值不超过1，求一个最长">
+<meta property="og:updated_time" content="2015-12-02T13:43:34.269Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Codeforces #333 div2">
+<meta name="twitter:description" content="代码：https://github.com/HarryGuo2012/ACMCode/tree/worldLine/Codeforces/%23333(Div%202)
+
+Two Bases题意：给你两个不同进制的数，让你比较大小。
+题解：直接转换到十进制比较就好。
+
+Approximating a Constant Range题意：给你一个序列，这个序列中相邻的元素之间的差值不超过1，求一个最长">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2015/12/02/Codeforces-333-div2/"/>
+
+
+
+
+
+  <title> Codeforces #333 div2 | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2015/12/02/Codeforces-333-div2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Codeforces #333 div2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-02T20:00:42+08:00">
+                2015-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h1><p><a href="https://github.com/HarryGuo2012/ACMCode/tree/worldLine/Codeforces/%23333(Div%202" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/tree/worldLine/Codeforces/%23333(Div%202</a>)</p>
+<hr>
+<h1 id="Two-Bases"><a href="#Two-Bases" class="headerlink" title="Two Bases"></a>Two Bases</h1><h2 id="题意："><a href="#题意：" class="headerlink" title="题意："></a>题意：</h2><p>给你两个不同进制的数，让你比较大小。</p>
+<h2 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h2><p>直接转换到十进制比较就好。</p>
+<hr>
+<h1 id="Approximating-a-Constant-Range"><a href="#Approximating-a-Constant-Range" class="headerlink" title="Approximating a Constant Range"></a>Approximating a Constant Range</h1><h2 id="题意：-1"><a href="#题意：-1" class="headerlink" title="题意："></a>题意：</h2><p>给你一个序列，这个序列中相邻的元素之间的差值不超过1，求一个最长的子串，使得这个子串中最大值和最小值的差不超过1。</p>
+<h2 id="题解：-1"><a href="#题解：-1" class="headerlink" title="题解："></a>题解：</h2><p>直接用两个指针$i,j,i\le j$表示这个串的头尾，向后扫如果$j$的位置大于$[i,j]$中的最小值加一，就让$i$跳着往前走就好，如果小于区间最大值减一，也让$i$跳着往前跳。整个过程维护两个RMQ表就好，不过这道题也可以dp。</p>
+<hr>
+<h1 id="The-Two-Routes"><a href="#The-Two-Routes" class="headerlink" title="The Two Routes"></a>The Two Routes</h1><h2 id="题意：-2"><a href="#题意：-2" class="headerlink" title="题意："></a>题意：</h2><p>有个完全图，边权都是1，部分边是公路，部分是铁路，现在火车和汽车同时从1号节点出发前往n号节点，中途不能同时在一个节点相遇，可以在n号节点等另外一个交通工具，现在问你最短时间，使得两个交通工具都在n号节点。</p>
+<h2 id="题解：-2"><a href="#题解：-2" class="headerlink" title="题解："></a>题解：</h2><p>这里有个巧妙地地方，由于边权都是1，并且是完全图，由三角形不等式，两个交通工具绝对无法相遇。所以直接spfa两边就好。</p>
+<hr>
+<h1 id="Lipshitz-Sequence"><a href="#Lipshitz-Sequence" class="headerlink" title="Lipshitz Sequence"></a>Lipshitz Sequence</h1><h2 id="题意：-3"><a href="#题意：-3" class="headerlink" title="题意："></a>题意：</h2><p>给你个序列，每次询问时$[L,R]$内所有的连续序列的利普希茨常数的和。</p>
+<h2 id="题解：-3"><a href="#题解：-3" class="headerlink" title="题解："></a>题解：</h2><p>此题做法非常的巧妙，首先我们来想想这样一个问题，对于一个连续函数$f(x)$而言，在区间$[L,R]$中是否一定存在一个斜率的绝对值$|k|$，使得$|k|\ge L,R的连线$？仔细想想后发现这是一定存在的，所以在离散域中，利普希茨常数一定存在与相邻的元素。所以直接维护一个RMQ，然后再二分就好。详见代码。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/模拟/" rel="tag"># 模拟</a>
+          
+            <a href="/HarryGuoBlog/tags/二分/" rel="tag"># 二分</a>
+          
+            <a href="/HarryGuoBlog/tags/RMQ/" rel="tag"># RMQ</a>
+          
+            <a href="/HarryGuoBlog/tags/spfa/" rel="tag"># spfa</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/11/21/Codeforces-332-div2/" rel="next" title="Codeforces #332 div2">
+                <i class="fa fa-chevron-left"></i> Codeforces #332 div2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/12/03/最小二乘法/" rel="prev" title="最小二乘法">
+                最小二乘法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码："><span class="nav-number">1.</span> <span class="nav-text">代码：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Two-Bases"><span class="nav-number">2.</span> <span class="nav-text">Two Bases</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意："><span class="nav-number">2.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解："><span class="nav-number">2.2.</span> <span class="nav-text">题解：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Approximating-a-Constant-Range"><span class="nav-number">3.</span> <span class="nav-text">Approximating a Constant Range</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意：-1"><span class="nav-number">3.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解：-1"><span class="nav-number">3.2.</span> <span class="nav-text">题解：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Two-Routes"><span class="nav-number">4.</span> <span class="nav-text">The Two Routes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意：-2"><span class="nav-number">4.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解：-2"><span class="nav-number">4.2.</span> <span class="nav-text">题解：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lipshitz-Sequence"><span class="nav-number">5.</span> <span class="nav-text">Lipshitz Sequence</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意：-3"><span class="nav-number">5.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解：-3"><span class="nav-number">5.2.</span> <span class="nav-text">题解：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

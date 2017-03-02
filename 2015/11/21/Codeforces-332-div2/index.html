@@ -1,0 +1,741 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数学,模拟,贪心," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="代码：https://github.com/HarryGuo2012/ACMCode/tree/worldLine/Codeforces/%23332(Div%202)
+Patrick and Shopping题意：现在有三个点三条边构成的图，问你从一个点出发访问完另外两个点，再回到当前点的最短路是多少。
+题解：四种情况，讨论讨论就好。
+Spongebob and Joke题意：现在给你一个映射表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codeforces #332 div2">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2015/11/21/Codeforces-332-div2/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="代码：https://github.com/HarryGuo2012/ACMCode/tree/worldLine/Codeforces/%23332(Div%202)
+Patrick and Shopping题意：现在有三个点三条边构成的图，问你从一个点出发访问完另外两个点，再回到当前点的最短路是多少。
+题解：四种情况，讨论讨论就好。
+Spongebob and Joke题意：现在给你一个映射表">
+<meta property="og:updated_time" content="2015-11-21T04:15:18.848Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Codeforces #332 div2">
+<meta name="twitter:description" content="代码：https://github.com/HarryGuo2012/ACMCode/tree/worldLine/Codeforces/%23332(Div%202)
+Patrick and Shopping题意：现在有三个点三条边构成的图，问你从一个点出发访问完另外两个点，再回到当前点的最短路是多少。
+题解：四种情况，讨论讨论就好。
+Spongebob and Joke题意：现在给你一个映射表">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2015/11/21/Codeforces-332-div2/"/>
+
+
+
+
+
+  <title> Codeforces #332 div2 | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2015/11/21/Codeforces-332-div2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Codeforces #332 div2
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-21T11:49:01+08:00">
+                2015-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h1><p><a href="https://github.com/HarryGuo2012/ACMCode/tree/worldLine/Codeforces/%23332(Div%202" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/tree/worldLine/Codeforces/%23332(Div%202</a>)</p>
+<h1 id="Patrick-and-Shopping"><a href="#Patrick-and-Shopping" class="headerlink" title="Patrick and Shopping"></a>Patrick and Shopping</h1><h2 id="题意："><a href="#题意：" class="headerlink" title="题意："></a>题意：</h2><p>现在有三个点三条边构成的图，问你从一个点出发访问完另外两个点，再回到当前点的最短路是多少。</p>
+<h2 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h2><p>四种情况，讨论讨论就好。</p>
+<h1 id="Spongebob-and-Joke"><a href="#Spongebob-and-Joke" class="headerlink" title="Spongebob and Joke"></a>Spongebob and Joke</h1><h2 id="题意：-1"><a href="#题意：-1" class="headerlink" title="题意："></a>题意：</h2><p>现在给你一个映射表，并给你映射后的集合，问你能否得出映射前的集合，是否有多解。</p>
+<h2 id="题解：-1"><a href="#题解：-1" class="headerlink" title="题解："></a>题解：</h2><p>就瞎比搞搞就好，由于原来的集合保存的是位置的信息，所以把映射表的位置和值反过来存，然后讨论一下就好。不过要注意无解的优先级要高于多解。</p>
+<h1 id="Day-at-the-Beach"><a href="#Day-at-the-Beach" class="headerlink" title="Day at the Beach"></a>Day at the Beach</h1><h2 id="题意：-2"><a href="#题意：-2" class="headerlink" title="题意："></a>题意：</h2><p>给你一个序列，问你最多能将这个序列分成多少个连续的块，使得每个块中排序后，整个序列是有序的。</p>
+<h2 id="题解：-2"><a href="#题解：-2" class="headerlink" title="题解："></a>题解：</h2><p>这题我们使用贪心的想法，从左往右扫，如果当前能够分，那就分。而能分的前提条件就是当前前缀的最大值小于等于当前后缀的最小值。</p>
+<h1 id="Spongebob-and-Squares"><a href="#Spongebob-and-Squares" class="headerlink" title="Spongebob and Squares"></a>Spongebob and Squares</h1><h2 id="题意：-3"><a href="#题意：-3" class="headerlink" title="题意："></a>题意：</h2><p>给你一个$x$，问你有多少组$n,m$使得，以$n*m$构成的长方形中，恰有$x$个正方形。</p>
+<h2 id="题解：-3"><a href="#题解：-3" class="headerlink" title="题解："></a>题解：</h2><p>令$f(n,m)$为以$n,m$为边长的长方形中正方形的个数。<br>那么令$n\leqslant m$<br>$$f(n,m)=\sum_{k=1}^{n}(n-k+1)(m-k+1)$$<br>展开整理得：<br>$$f(n,m)=(n^2+n)m+n^2+n+\sum_{k=1}^{n}-(n+m+2)k+k^2$$<br>收拢整理得：<br>$$f(n,m)=(\frac{n^2}{2}+\frac{n}{2})m+n^2+n-\frac{(n+2)(n+1)n}{2}+\frac{n(n+1)(n+2)}{6}$$<br>然后发现这是$m$的一次方程，由于有$n$的三次方项，所以可以通过枚举$n$的方式来计数，不过枚举的上限要仔细计算，不然会挂（我就是这么挂的！悲剧！）</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/数学/" rel="tag"># 数学</a>
+          
+            <a href="/HarryGuoBlog/tags/模拟/" rel="tag"># 模拟</a>
+          
+            <a href="/HarryGuoBlog/tags/贪心/" rel="tag"># 贪心</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/11/18/Educational-Codeforces-Round-1/" rel="next" title="Educational Codeforces Round 1">
+                <i class="fa fa-chevron-left"></i> Educational Codeforces Round 1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/12/02/Codeforces-333-div2/" rel="prev" title="Codeforces #333 div2">
+                Codeforces #333 div2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码："><span class="nav-number">1.</span> <span class="nav-text">代码：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Patrick-and-Shopping"><span class="nav-number">2.</span> <span class="nav-text">Patrick and Shopping</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意："><span class="nav-number">2.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解："><span class="nav-number">2.2.</span> <span class="nav-text">题解：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spongebob-and-Joke"><span class="nav-number">3.</span> <span class="nav-text">Spongebob and Joke</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意：-1"><span class="nav-number">3.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解：-1"><span class="nav-number">3.2.</span> <span class="nav-text">题解：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Day-at-the-Beach"><span class="nav-number">4.</span> <span class="nav-text">Day at the Beach</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意：-2"><span class="nav-number">4.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解：-2"><span class="nav-number">4.2.</span> <span class="nav-text">题解：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spongebob-and-Squares"><span class="nav-number">5.</span> <span class="nav-text">Spongebob and Squares</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意：-3"><span class="nav-number">5.1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解：-3"><span class="nav-number">5.2.</span> <span class="nav-text">题解：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

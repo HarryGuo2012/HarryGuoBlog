@@ -1,0 +1,752 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="模拟,贪心," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="昊昊爱运动前缀和要做这道题首先要会前缀和这个技巧。现在给出一个不变的序列$A$，每次询问$[L,R]$这个区间内的和该怎么做呢？既是求：$$\sum_{i=L}^RA_i$$如果每次都从$L$加到$R$将是一个不小的花费，所以我们可以选择间接地求解，即：$$\sum_{i=L}^RA_i=\sum_{i=0}^RA_i-\sum_{i=0}^{L-1}A_i$$后面的两项既是前缀和，是可以扫一遍就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第七届ACM趣味程序设计竞赛第二场（正式赛）">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2015/12/06/第七届ACM趣味程序设计竞赛第二场（正式赛）/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="昊昊爱运动前缀和要做这道题首先要会前缀和这个技巧。现在给出一个不变的序列$A$，每次询问$[L,R]$这个区间内的和该怎么做呢？既是求：$$\sum_{i=L}^RA_i$$如果每次都从$L$加到$R$将是一个不小的花费，所以我们可以选择间接地求解，即：$$\sum_{i=L}^RA_i=\sum_{i=0}^RA_i-\sum_{i=0}^{L-1}A_i$$后面的两项既是前缀和，是可以扫一遍就">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/趣味赛/1.png">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/趣味赛/2.png">
+<meta property="og:updated_time" content="2017-03-02T04:59:27.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第七届ACM趣味程序设计竞赛第二场（正式赛）">
+<meta name="twitter:description" content="昊昊爱运动前缀和要做这道题首先要会前缀和这个技巧。现在给出一个不变的序列$A$，每次询问$[L,R]$这个区间内的和该怎么做呢？既是求：$$\sum_{i=L}^RA_i$$如果每次都从$L$加到$R$将是一个不小的花费，所以我们可以选择间接地求解，即：$$\sum_{i=L}^RA_i=\sum_{i=0}^RA_i-\sum_{i=0}^{L-1}A_i$$后面的两项既是前缀和，是可以扫一遍就">
+<meta name="twitter:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/趣味赛/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2015/12/06/第七届ACM趣味程序设计竞赛第二场（正式赛）/"/>
+
+
+
+
+
+  <title> 第七届ACM趣味程序设计竞赛第二场（正式赛） | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2015/12/06/第七届ACM趣味程序设计竞赛第二场（正式赛）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第七届ACM趣味程序设计竞赛第二场（正式赛）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-06T16:12:14+08:00">
+                2015-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="昊昊爱运动"><a href="#昊昊爱运动" class="headerlink" title="昊昊爱运动"></a>昊昊爱运动</h1><h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><p>要做这道题首先要会前缀和这个技巧。现在给出一个不变的序列$A$，每次询问$[L,R]$这个区间内的和该怎么做呢？既是求：<br>$$\sum_{i=L}^RA_i$$<br>如果每次都从$L$加到$R$将是一个不小的花费，所以我们可以选择间接地求解，即：<br>$$\sum_{i=L}^RA_i=\sum_{i=0}^RA_i-\sum_{i=0}^{L-1}A_i$$<br>后面的两项既是前缀和，是可以扫一遍就得到的序列：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</div><div class="line">	sum[i]=sum[i<span class="number">-1</span>]+a[i];</div></pre></td></tr></table></figure></p>
+<p>每次询问$[L,R]$的和的时候就返回<code>sum[R]-sum[L-1]</code>就好了。</p>
+<h2 id="关于这道题"><a href="#关于这道题" class="headerlink" title="关于这道题"></a>关于这道题</h2><p>有了前缀和的知识，这道题就迎刃而解了。如果第$i$个位置上有颜色$c$，那么<code>a[c][i]=1</code>，否则<code>a[c][i]=0</code>，然后对每个颜色都构建前缀和。每次询问的时候，只要检查每个颜色在这个区间的和是否是0即可。</p>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><p><a href="https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1256.cpp" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1256.cpp</a><br><a id="more"></a></p>
+<hr>
+<h1 id="谕神的密码"><a href="#谕神的密码" class="headerlink" title="谕神的密码"></a>谕神的密码</h1><h2 id="贪心的思想"><a href="#贪心的思想" class="headerlink" title="贪心的思想"></a>贪心的思想</h2><p>想想怎样的数是足够大的，自然是首位足够大就足够大了，足够小也是一样的道理。有了这个想法，这道题就相当简单了，只要从高往低每一位枚举数即可，如果要数字足够大，那么每次就从9枚举到0，如果要数字足够小，那么每次就从0枚举到9，当然首位要特殊判断。<br>枚举到什么时候呢？自然，如果要数字足够大，只要当前的和还有剩下的，就继续枚举，如果要数字足够小，那么只要我们后面能全部放9来达到和的话，就继续枚举。<br>很细致的一道题。</p>
+<h2 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h2><p><a href="https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1251.cpp" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1251.cpp</a></p>
+<hr>
+<h1 id="斓少摘苹果"><a href="#斓少摘苹果" class="headerlink" title="斓少摘苹果"></a>斓少摘苹果</h1><h2 id="怎样拿比较优越？"><a href="#怎样拿比较优越？" class="headerlink" title="怎样拿比较优越？"></a>怎样拿比较优越？</h2><p>仔细想想整个过程，要使得拿的次数最少，自然每次要拿的足够多，最好每次都能拿m个，这样一来一定是最优越的。</p>
+<h2 id="模型的转换"><a href="#模型的转换" class="headerlink" title="模型的转换"></a>模型的转换</h2><p>为了保证每次都能拿到m个，我们需要一个非常巧妙地想法，想想这个问题其实是将苹果分成m堆，每堆的苹果都来自不同的树。那么我们可以将每棵树都染个色，把每个苹果考虑成方块，这样我们就得到了许许多多不同颜色的方块。现在我们只需要将这些方块铺成一个$m*t$的矩形即可。其中$t$是拿的次数。<br><img src="/HarryGuoBlog/images/趣味赛/1.png" alt=""><br>自然我们能够想到，一行一行的铺，每次用完一种颜色再换下一种颜色，最后一行不必铺完。这样一来除非某一种颜色特别多，否则每一列就不会有相同的颜色了，并且是最快的，因为每次我们取$m$个，那么我们能得到$t=sum/m$向上取整。<br><img src="/HarryGuoBlog/images/趣味赛/2.png" alt=""><br>那么加入某一种颜色特别多怎么办，那么我们只能将$t$取那种颜色那么多，否则一定会有相同的颜色。<br>所以最后的结果应当是<br>$$t=max(maxColor,\left \lceil \frac{sum}{m} \right \rceil)$$</p>
+<h2 id="代码：-2"><a href="#代码：-2" class="headerlink" title="代码："></a>代码：</h2><p><a href="https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1255.cpp" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1255.cpp</a></p>
+<hr>
+<h1 id="阿里巴巴和n个大盗"><a href="#阿里巴巴和n个大盗" class="headerlink" title="阿里巴巴和n个大盗"></a>阿里巴巴和n个大盗</h1><h2 id="其实很简单。。"><a href="#其实很简单。。" class="headerlink" title="其实很简单。。"></a>其实很简单。。</h2><p>我们一步步的来推理。阿里巴巴先提出方案，然后编号大的再提出。</p>
+<ul>
+<li>n=1，那么阿里巴巴一定死定了，因为他无论怎么做，都无法获得半数以上的票</li>
+<li>n=2，现在有两个海盗，2号很清楚，假如弄死阿里巴巴，就变成了上面那种状态，所以自己也活不了。在这种情况下，自然投阿里巴巴一票，那么阿里巴巴就零成本拿到了半数以上的票，所以他把金子都拿了。</li>
+<li>n=3，现在有点复杂了，此时如果要活下来，首先我们需要弄到半数以上的票，给1个金子给1号，就能把1号收买了，这是因为如果1号投反对，那么1号得不到任何东西。2号同样的道理。所以分别给1号和2号一个金子，自己就能拿m-2个金子。</li>
+<li>n=4，这时候你或许有点感觉了，要让别人帮你，只需提出比下家更有利的方案即可，自然，要给3号海盗1个金币。此时有了两票了（阿里巴巴自己有一票），还差1票（现在有5个人），所以我们应该给1号或者2号更多的金子，他们就能帮助阿里巴巴。但是给谁呢？自然，随便给谁2个金币都可以。所以此时阿里巴巴能得到m-3个金子。</li>
+<li>n=5，这时候海盗的贪婪就十分明显了。。如果我们采用前面的策略，其实不是最优的。由于下家有个随便给谁2个金币的设定，所以只要给1号1个金币，2号一个金币，他们就一定会帮你，因为他们如果不帮你，也许他们能获得2个金币，也许什么都拿不到，由于金币本身是价值连城的，所以海盗们一定不会走一步险棋。同样再给4号一个金币。所以能得到m-3个金币。</li>
+<li>。。。</li>
+</ul>
+<p>你可以继续推理，不过到这里，想必你已经得到答案了。由于是两项两项交错着分配金币的。所以答案应当就是m-n/2-1。如果计算出来是负数，那么必死无疑。</p>
+<h2 id="代码：-3"><a href="#代码：-3" class="headerlink" title="代码："></a>代码：</h2><p><a href="https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1253.cpp" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1253.cpp</a></p>
+<hr>
+<h1 id="24点游戏"><a href="#24点游戏" class="headerlink" title="24点游戏"></a>24点游戏</h1><h2 id="dfs"><a href="#dfs" class="headerlink" title="dfs"></a>dfs</h2><p>首先你要学会dfs，这个其实很简单，就是利用了计算机栈入栈出的性质。这里不细讲，直接看代码就懂了</p>
+<h2 id="eps"><a href="#eps" class="headerlink" title="eps"></a>eps</h2><p>这道题要考虑eps，什么是eps呢，就是能容忍的最大误差，其实计算机保存浮点数是靠二进制的，那么一定是不准确，所以两个数大约相等，我们就应该认为他们是相等的。所以等于应该改成这样：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">equal</span><span class="params">(<span class="keyword">double</span> a,<span class="keyword">double</span> b)</span></span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="built_in">abs</span>(a-b)&lt;eps;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>一般eps取1e-8</p>
+<h2 id="代码：-4"><a href="#代码：-4" class="headerlink" title="代码："></a>代码：</h2><p><a href="https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1252.cpp" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1252.cpp</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/模拟/" rel="tag"># 模拟</a>
+          
+            <a href="/HarryGuoBlog/tags/贪心/" rel="tag"># 贪心</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/12/03/最小二乘法/" rel="next" title="最小二乘法">
+                <i class="fa fa-chevron-left"></i> 最小二乘法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/12/09/判断素数及分解质因数/" rel="prev" title="判断素数及分解质因数">
+                判断素数及分解质因数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#昊昊爱运动"><span class="nav-number">1.</span> <span class="nav-text">昊昊爱运动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前缀和"><span class="nav-number">1.1.</span> <span class="nav-text">前缀和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于这道题"><span class="nav-number">1.2.</span> <span class="nav-text">关于这道题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码："><span class="nav-number">1.3.</span> <span class="nav-text">代码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谕神的密码"><span class="nav-number">2.</span> <span class="nav-text">谕神的密码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#贪心的思想"><span class="nav-number">2.1.</span> <span class="nav-text">贪心的思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码：-1"><span class="nav-number">2.2.</span> <span class="nav-text">代码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#斓少摘苹果"><span class="nav-number">3.</span> <span class="nav-text">斓少摘苹果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#怎样拿比较优越？"><span class="nav-number">3.1.</span> <span class="nav-text">怎样拿比较优越？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型的转换"><span class="nav-number">3.2.</span> <span class="nav-text">模型的转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码：-2"><span class="nav-number">3.3.</span> <span class="nav-text">代码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#阿里巴巴和n个大盗"><span class="nav-number">4.</span> <span class="nav-text">阿里巴巴和n个大盗</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#其实很简单。。"><span class="nav-number">4.1.</span> <span class="nav-text">其实很简单。。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码：-3"><span class="nav-number">4.2.</span> <span class="nav-text">代码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#24点游戏"><span class="nav-number">5.</span> <span class="nav-text">24点游戏</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dfs"><span class="nav-number">5.1.</span> <span class="nav-text">dfs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eps"><span class="nav-number">5.2.</span> <span class="nav-text">eps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码：-4"><span class="nav-number">5.3.</span> <span class="nav-text">代码：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,776 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="模拟,贪心,计算几何,数论,图论,动态规划,字符串,数据结构," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="代码位置：https://github.com/HarryGuo2012/ACMCode/tree/worldLine/CDOJ/14thPr
+A Graph Problem题意给个$n$个点的无向图，再给出$k$个要求，问最多能删除多少条边，使得每个要求的点对联通。
+题解注意到点的规模只有15，我们可以枚举集合来解决。维护一个并查集，我们能够知道哪些点是必须在同一个连通块内的，这样要求的规模就从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第十四届校赛初赛">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2016/03/29/第十四届校赛初赛/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="代码位置：https://github.com/HarryGuo2012/ACMCode/tree/worldLine/CDOJ/14thPr
+A Graph Problem题意给个$n$个点的无向图，再给出$k$个要求，问最多能删除多少条边，使得每个要求的点对联通。
+题解注意到点的规模只有15，我们可以枚举集合来解决。维护一个并查集，我们能够知道哪些点是必须在同一个连通块内的，这样要求的规模就从">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/校赛/1.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/校赛/2.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/校赛/3.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/校赛/4.jpg">
+<meta property="og:updated_time" content="2017-03-02T04:59:27.924Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第十四届校赛初赛">
+<meta name="twitter:description" content="代码位置：https://github.com/HarryGuo2012/ACMCode/tree/worldLine/CDOJ/14thPr
+A Graph Problem题意给个$n$个点的无向图，再给出$k$个要求，问最多能删除多少条边，使得每个要求的点对联通。
+题解注意到点的规模只有15，我们可以枚举集合来解决。维护一个并查集，我们能够知道哪些点是必须在同一个连通块内的，这样要求的规模就从">
+<meta name="twitter:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/校赛/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2016/03/29/第十四届校赛初赛/"/>
+
+
+
+
+
+  <title> 第十四届校赛初赛 | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2016/03/29/第十四届校赛初赛/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第十四届校赛初赛
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-29T16:26:41+08:00">
+                2016-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="代码位置："><a href="#代码位置：" class="headerlink" title="代码位置："></a>代码位置：</h1><p><a href="https://github.com/HarryGuo2012/ACMCode/tree/worldLine/CDOJ/14thPr" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/tree/worldLine/CDOJ/14thPr</a></p>
+<h1 id="A-Graph-Problem"><a href="#A-Graph-Problem" class="headerlink" title="A Graph Problem"></a>A Graph Problem</h1><h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>给个$n$个点的无向图，再给出$k$个要求，问最多能删除多少条边，使得每个要求的点对联通。</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>注意到点的规模只有15，我们可以枚举集合来解决。<br>维护一个并查集，我们能够知道哪些点是必须在同一个连通块内的，这样要求的规模就从$n^2$降到了$n$。<br>令$dp[s]$表示对于要求的子集$s$，满足$s$中的每个要求需要的最少的边。这样一来，我们能够得到转移是：<br>$$dp[s] = \underset{u,v}{min} (dp[u] + dp[v]),u\cup v = s$$<br>由上面的转移，我们就只需要预处理出把每个要求子集中的点全部联通的最小解了。<br>祥见代码。</p>
+<hr>
+<h1 id="Bank"><a href="#Bank" class="headerlink" title="Bank"></a>Bank</h1><h2 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h2><p>有个神奇的售货机，有无限的纸币，并且有无限的商品，任何价格的商品都能买到。<br>现在要去换零钱，由于售货机的找钱机制是随机的，所以人品不好的时候是得不到我们想要的零钱的。<br>比如现在有40元售货机待找，我们想要一张10元的零钱，但是售货机却给了两张20的纸币。</p>
+<h2 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h2><p>结合生活实际，这道题是非常简单的。<br>首先我们将这些钱分类，一个单位下的分一类，换句话说分是一类，角是一类，1元是一类，10元是一类。。<br>我们首先考虑类和类之间的关系，由于售货机不会将10元的钱来当1元或者2元用，所以类向上是没啥关系的，由于脸很差，所以售货机总是尝试用价值高的类来还钱，比如售货机不会用10个1块来当10块用，所以类向下是没啥关系的。<br>所以我们得出一个结论，类之间是独立的，那么问题就简单了，由于每个类是一样的，我们就只需要知道类里面的三个数字之间的关系就好了，这时候脑补一下就能得出结论。<br>接下来我们就可以枚举用多少块，然后check剩下的钱是否能够得到我们想要的零钱就好。<br>详见代码</p>
+<hr>
+<a id="more"></a>
+<h1 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h1><h2 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h2><p>问有多少天，日期数与星期数是一样的。</p>
+<h2 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h2><p>很容易发现一件事情，如果要一样，1号就必须是星期1，所以就只用统计有多少个月1号是星期1。<br>由于四百年一个轮回。。所以只要模拟四百年内的情况就好了<br>过程很繁琐，要仔细写</p>
+<hr>
+<h1 id="Easy-Problem"><a href="#Easy-Problem" class="headerlink" title="Easy Problem"></a>Easy Problem</h1><h2 id="题意-3"><a href="#题意-3" class="headerlink" title="题意"></a>题意</h2><p>题意就是那个公式啦</p>
+<h2 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h2><p>由于用字母一定优于用子串，所以就枚举每个字母，然后统计答案就好</p>
+<hr>
+<h1 id="Find-the-Stuff"><a href="#Find-the-Stuff" class="headerlink" title="Find the Stuff"></a>Find the Stuff</h1><h2 id="题意-4"><a href="#题意-4" class="headerlink" title="题意"></a>题意</h2><p>有个人机器人从最下面那层开始从左向右消方块，问第$k$个被消掉的是哪个</p>
+<h2 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h2><p>首先离散化，这样，问题就变成了：给个序列，然后问第一个小于$k$的前缀和的位置在哪：<br><img src="/HarryGuoBlog/images/校赛/1.jpg" alt=""><br>对于这个问题，可以预处理前缀和，然后二分，上图中蓝色的位置就是我们二分出来的层。<br>由于前面我们离散化了，所以现在二分出来的答案其实是若干相同的层中的某一层的某个位置。取模后便能知道在哪一层了：<br><img src="/HarryGuoBlog/images/校赛/2.jpg" alt=""><br>接下来就是具体在哪个位置，由于知道在哪一层了，所以其实就是解决前缀中有多少个数小于某个数的问题，这个能在树状数组上二分解决。</p>
+<hr>
+<h1 id="Good-Water-Problem"><a href="#Good-Water-Problem" class="headerlink" title="Good Water Problem"></a>Good Water Problem</h1><h2 id="题意-5"><a href="#题意-5" class="headerlink" title="题意"></a>题意</h2><p>给个集合，每次的操作可以去除两个数$x,y$，然后将他们得最大公约数和最小公倍数填回去，问最后从大到小排序后，字典序最大的解。</p>
+<h2 id="题解-5"><a href="#题解-5" class="headerlink" title="题解"></a>题解</h2><p>首先，我们能够直观的得到最大的数一定是所有的数的lcm，问题就是答案中的第二个数会不会受到求解第一个数时的顺序的影响。我们首先观察一个素数的不同幂组成的序列：<br>$$A={p^{a_0},p^{a_1},p^{a_2},\cdots,p^{a_k}}$$<br>他们的lcm很明显是$p^{max(a)}$，任意$p^i$与$p^j,i\ge j$求$lcm$，答案都是$p^i$，所以$i$与比$i$小的幂求$lcm$的时候，$i$都会被保存下来。<br>另外由于任意$p^i$与$p^j,i\le j$求$gcd$的答案都是$p^i$，所以当$i$与比$i$打的幂求$gcd$的时候，$i$都会被保存下来。<br>由于答案只和当前序列中$p$的最高次幂有关系，所以综上，在$A$中第一次的顺序并不会影响第二次的答案。<br>并且每次操作只是消除一个$p$的最高幂。<br>而对于一个非素数幂的序列来说，只是若干个不同的素数幂的序列的叠加而已。<br>所以我们能够得到如下算法：</p>
+<blockquote>
+<p>维护每个素数的所有的幂的个数<br>每次的答案就是将所有的素数的最高幂乘起来<br>消掉每个素数的一个最高幂</p>
+</blockquote>
+<p>详见代码</p>
+<hr>
+<h1 id="Happy-Shape"><a href="#Happy-Shape" class="headerlink" title="Happy Shape"></a>Happy Shape</h1><h2 id="题意-6"><a href="#题意-6" class="headerlink" title="题意"></a>题意</h2><p>给个平面的长方形和圆，求交的面积</p>
+<h2 id="题解-6"><a href="#题解-6" class="headerlink" title="题解"></a>题解</h2><p>首先将圆的圆心移动到原点，然后按原点将长方形剖分为四个三角形$OAB,OCD,OAD,OBC$：<br><img src="/HarryGuoBlog/images/校赛/3.jpg" alt=""><br>接下来我们只用计算每个三角形与圆的交的面积，对于$OBC$这种除了$O$以外有一个点在圆内的三角形。<br>只需要求一个扇形$OFG$的面积和一个三角形$OBF$的面积：<br><img src="/HarryGuoBlog/images/校赛/4.jpg" alt=""><br>对于$OCD$这种除了$O$有两个点不在圆内的三角形，只需要求一个扇形的面积即可。<br>对于$OAB$这种全部在圆内的三角形，只需要计算整个三角形的面积。<br>很明显这种做法必须要求我们知道面积的正负。<br>逆时针沿着矩形走，如果$O$在右手边则面积是负的。</p>
+<hr>
+<h1 id="Infinity-Set"><a href="#Infinity-Set" class="headerlink" title="Infinity Set"></a>Infinity Set</h1><h2 id="题意-7"><a href="#题意-7" class="headerlink" title="题意"></a>题意</h2><p>给$x,y$，将所有的$x,y$系数非负的线性组合排序后，问第$k$个是多少。</p>
+<h2 id="题解-7"><a href="#题解-7" class="headerlink" title="题解"></a>题解</h2><p>易证明若$x,y$互素，则从$xy-x-y+1$开始，每个整数都可以被他们表示出来。<br>由于$xy-x-y+1$并不会太大，所以就把小于这个值的所有数都暴力出来，然后就可以了。<br>如果不互素，则首先除掉$gcd$，最后答案再乘回来即可。</p>
+<hr>
+<h1 id="Just-a-Magic-String"><a href="#Just-a-Magic-String" class="headerlink" title="Just a Magic String"></a>Just a Magic String</h1><h2 id="题意-8"><a href="#题意-8" class="headerlink" title="题意"></a>题意</h2><p>首先有个串a，每次将串取反（a变b，b变a）后接到串后面，得到一个无限长的串。<br>问串$X$在这个无限长的串的哪个位置首先出现。</p>
+<h2 id="题解-8"><a href="#题解-8" class="headerlink" title="题解"></a>题解</h2><p>这个题暴力$KMP$就好，由于串$X$的长度是$10^6$，所以只要我们构造一个$10^7$长的串，就一定能把$X$包含进去，因为如果$10^6$的串中没有匹配到$X$，那么$X$一定跨在两个$10^6$的串上面的，由于abbabaab把所有ab的二元组包含了进去，所以最多需要$8*10^6$长的串即可。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/模拟/" rel="tag"># 模拟</a>
+          
+            <a href="/HarryGuoBlog/tags/贪心/" rel="tag"># 贪心</a>
+          
+            <a href="/HarryGuoBlog/tags/计算几何/" rel="tag"># 计算几何</a>
+          
+            <a href="/HarryGuoBlog/tags/数论/" rel="tag"># 数论</a>
+          
+            <a href="/HarryGuoBlog/tags/图论/" rel="tag"># 图论</a>
+          
+            <a href="/HarryGuoBlog/tags/动态规划/" rel="tag"># 动态规划</a>
+          
+            <a href="/HarryGuoBlog/tags/字符串/" rel="tag"># 字符串</a>
+          
+            <a href="/HarryGuoBlog/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2016/03/16/球盒问题/" rel="next" title="球盒问题">
+                <i class="fa fa-chevron-left"></i> 球盒问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2016/05/23/快速傅里叶变换/" rel="prev" title="快速傅里叶变换">
+                快速傅里叶变换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码位置："><span class="nav-number">1.</span> <span class="nav-text">代码位置：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A-Graph-Problem"><span class="nav-number">2.</span> <span class="nav-text">A Graph Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意"><span class="nav-number">2.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解"><span class="nav-number">2.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bank"><span class="nav-number">3.</span> <span class="nav-text">Bank</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意-1"><span class="nav-number">3.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解-1"><span class="nav-number">3.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Date"><span class="nav-number">4.</span> <span class="nav-text">Date</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意-2"><span class="nav-number">4.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解-2"><span class="nav-number">4.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Easy-Problem"><span class="nav-number">5.</span> <span class="nav-text">Easy Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意-3"><span class="nav-number">5.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解-3"><span class="nav-number">5.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Find-the-Stuff"><span class="nav-number">6.</span> <span class="nav-text">Find the Stuff</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意-4"><span class="nav-number">6.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解-4"><span class="nav-number">6.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Good-Water-Problem"><span class="nav-number">7.</span> <span class="nav-text">Good Water Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意-5"><span class="nav-number">7.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解-5"><span class="nav-number">7.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Happy-Shape"><span class="nav-number">8.</span> <span class="nav-text">Happy Shape</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意-6"><span class="nav-number">8.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解-6"><span class="nav-number">8.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Infinity-Set"><span class="nav-number">9.</span> <span class="nav-text">Infinity Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意-7"><span class="nav-number">9.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解-7"><span class="nav-number">9.2.</span> <span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Just-a-Magic-String"><span class="nav-number">10.</span> <span class="nav-text">Just a Magic String</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意-8"><span class="nav-number">10.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题解-8"><span class="nav-number">10.2.</span> <span class="nav-text">题解</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

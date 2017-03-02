@@ -1,0 +1,747 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="傅里叶变换," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="感谢傅里叶同学做出的杰出贡献
+
+什么是傅里叶变换？请看这里
+一些先修的概念复数就是$\sqrt{-1}$啦，我们写作$i$
+单位根这是整个变换的核心，也就是满足$z^n=1$的所有复数我们定义$\omega_n=e^{\frac{2\pi i}{n}}$那么所有的n次单位根就是$$\omega_n=e^{\frac{2\pi i k}{n}},k=0,1,2\cdots n-1$$这些单位根为啥">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速傅里叶变换">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2016/05/23/快速傅里叶变换/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="感谢傅里叶同学做出的杰出贡献
+
+什么是傅里叶变换？请看这里
+一些先修的概念复数就是$\sqrt{-1}$啦，我们写作$i$
+单位根这是整个变换的核心，也就是满足$z^n=1$的所有复数我们定义$\omega_n=e^{\frac{2\pi i}{n}}$那么所有的n次单位根就是$$\omega_n=e^{\frac{2\pi i k}{n}},k=0,1,2\cdots n-1$$这些单位根为啥">
+<meta property="og:updated_time" content="2016-05-23T06:07:49.544Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="快速傅里叶变换">
+<meta name="twitter:description" content="感谢傅里叶同学做出的杰出贡献
+
+什么是傅里叶变换？请看这里
+一些先修的概念复数就是$\sqrt{-1}$啦，我们写作$i$
+单位根这是整个变换的核心，也就是满足$z^n=1$的所有复数我们定义$\omega_n=e^{\frac{2\pi i}{n}}$那么所有的n次单位根就是$$\omega_n=e^{\frac{2\pi i k}{n}},k=0,1,2\cdots n-1$$这些单位根为啥">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2016/05/23/快速傅里叶变换/"/>
+
+
+
+
+
+  <title> 快速傅里叶变换 | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2016/05/23/快速傅里叶变换/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                快速傅里叶变换
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-23T12:10:05+08:00">
+                2016-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/算法讲解/" itemprop="url" rel="index">
+                    <span itemprop="name">算法讲解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>感谢傅里叶同学做出的杰出贡献</p>
+</blockquote>
+<h1 id="什么是傅里叶变换？"><a href="#什么是傅里叶变换？" class="headerlink" title="什么是傅里叶变换？"></a>什么是傅里叶变换？</h1><p>请看<a href="http://harryguo.me/2015/11/14/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" target="_blank" rel="external">这里</a></p>
+<h1 id="一些先修的概念"><a href="#一些先修的概念" class="headerlink" title="一些先修的概念"></a>一些先修的概念</h1><h2 id="复数"><a href="#复数" class="headerlink" title="复数"></a>复数</h2><p>就是$\sqrt{-1}$啦，我们写作$i$</p>
+<h2 id="单位根"><a href="#单位根" class="headerlink" title="单位根"></a>单位根</h2><p>这是整个变换的核心，也就是满足$z^n=1$的所有复数<br>我们定义$\omega_n=e^{\frac{2\pi i}{n}}$<br>那么所有的n次单位根就是<br>$$\omega_n=e^{\frac{2\pi i k}{n}},k=0,1,2\cdots n-1$$<br>这些单位根为啥长这样呢？<br>仔细想想发现这些单位根构成复平面上的单位圆的内接正$n$边形</p>
+<h2 id="欧拉公式"><a href="#欧拉公式" class="headerlink" title="欧拉公式"></a>欧拉公式</h2><p>计算机没法计算复数，我们需要用到欧拉公式：<br>$$e^{i\theta}=cos(\theta)+isin(\theta)$$<br><a id="more"></a></p>
+<h1 id="离散傅里叶变换"><a href="#离散傅里叶变换" class="headerlink" title="离散傅里叶变换"></a>离散傅里叶变换</h1><h2 id="DFT"><a href="#DFT" class="headerlink" title="DFT"></a>DFT</h2><p>定义一个多项式$A(x)$为$A(x)=\sum_{i=0}^{n-1}a_ix^i$<br>那么其系数向量$(a_0,a_1\cdots a_{n-1})$的离散傅里叶变换为：<br>将$n$次的单位根向量作为多项式的点值带入多项式计算出来的向量，换句话就是说，系数向量的DFT为，$(A(\omega_n^0),A(\omega_n^1)\cdots , A(\omega_n^{n-1}))$</p>
+<h2 id="IDFT"><a href="#IDFT" class="headerlink" title="IDFT"></a>IDFT</h2><p>IDFT是逆变换，实际上就是解方程的过程<br>我们不难发现DFT的过程实际上是下面这个矩阵运算：<br>$$<br>\begin{bmatrix}<br>(\omega_{n}^0)^0 &amp;  (\omega_{n}^0)^1 &amp; \cdots &amp; (\omega_{n}^0)^{n-1}\\<br>(\omega_{n}^1)^0 &amp;  (\omega_{n}^1)^1 &amp; \cdots &amp; (\omega_{n}^1)^{n-1}\\<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>(\omega_{n}^{n-1})^0 &amp;  (\omega_{n}^{n-1})^1 &amp; \cdots &amp; (\omega_{n}^{n-1})^{n-1}<br>\end{bmatrix}<br>\begin{bmatrix}<br>a_0\\<br>a_1\\<br>\vdots\\<br>a_{n-1}<br>\end{bmatrix}<br>=<br>\begin{bmatrix}<br>A(\omega_n^0)\\<br>A(\omega_n^1)\\<br>\vdots\\<br>A(\omega_n^{n-1})<br>\end{bmatrix}<br>$$<br>我们令系数矩阵为$V$，为了解决这个线性方程，我们必须找到$V$的逆。<br>我们定义$D$，其中$D$中的每个元素都是$V$中对应位置的共轭。<br>然后我们考察一下$E=D·V$<br>仔细计算后发现$E$竟然是$nI_n$，其中$I_n$表示的是$n$阶单位矩阵<br>这样一来我们就发现$V$的逆矩阵$V^{-1}=\frac{1}{n}D$<br>所以逆变换和正变换在运算上只是一个$n$的倍数和共轭的关系，下面讨论的都是正变换，逆变换类似。</p>
+<h1 id="Cooley-Tukey算法"><a href="#Cooley-Tukey算法" class="headerlink" title="Cooley-Tukey算法"></a>Cooley-Tukey算法</h1><p>Cooley-Tukey算法是FFT的一种，也是比较好懂的一种。</p>
+<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>算法的思想和CDQ分治很类似，都是通过预先处理好的一半来求出另一半的答案<br>算法将$A$的每个分量的运算，按照指数奇偶分类：<br>$A(\omega_n^k)=\sum_{i=0}^{n-1}a_i\omega_n^{ki}=\sum_{i=0}^{\frac{n}{2}-1}a_{2i}\omega_n^{2ki}+\omega_n^k\sum_{i=0}^{\frac{n}{2}-1}a_{2i+1}\omega_n^{2ki}$<br>酱紫有什么好处呢？<br>我们知道$\omega_n^{2k}=e^{\frac{2\pi ki}{n}·2}=e^{\frac{2\pi ki}{\frac{n}{2}}}=\omega_{\frac{n}{2}}^{k}$<br>再把这个放回和式：<br>$$A(\omega_n^k)=\sum_{i=0}^{\frac{n}{2}-1}a_{2i}\omega_{\frac{n}{2}}^{ki}+\omega_n^k\sum_{i=0}^{\frac{n}{2}-1}a_{2i+1}\omega_{\frac{n}{2}}^{ki}$$<br>另外由于单位根刚好将单位圆分成$n$边形<br>所以在原点的另一侧<br>$\omega_n^{k+\frac{n}{2}}=-\omega_n^{k}$<br>刚好转了180度<br>说了这么多，到底这些有什么用呢<br>我们可以发现：<br>对于$k&lt;\frac{n}{2}$<br>$$A(\omega_n^k)=\sum_{i=0}^{\frac{n}{2}-1}a_{2i}\omega_{\frac{n}{2}}^{ki}+\omega_n^k\sum_{i=0}^{\frac{n}{2}-1}a_{2i+1}\omega_{\frac{n}{2}}^{ki}$$<br>$$A(\omega_n^{k+\frac{n}{2}})=\sum_{i=0}^{\frac{n}{2}-1}a_{2i}\omega_{\frac{n}{2}}^{ki}-\omega_n^k\sum_{i=0}^{\frac{n}{2}-1}a_{2i+1}\omega_{\frac{n}{2}}^{ki}$$<br>这样一来如果我们处理好了$A(\omega_n^k)$，那么我们就能$O(1)$求出$A(\omega_n^{k+\frac{n}{2}})$<br>这样递归下去后，算法的复杂度就变为了$O(nlogn)$</p>
+<h2 id="递归实现方法"><a href="#递归实现方法" class="headerlink" title="递归实现方法"></a>递归实现方法</h2><p>代码不是我写的，代码是Miskcoo写的，看<a href="http://blog.miskcoo.com/2015/04/polynomial-multiplication-and-fast-fourier-transform#IDFT" target="_blank" rel="external">这里</a>（不是我懒，是我写出来的没他好。。。。<br>这里$n$必须扩展到2的幂<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">fft</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt;* buffer, <span class="keyword">int</span> offset, <span class="keyword">int</span> step, <span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt;* epsilon)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span>;</div><div class="line">	<span class="keyword">int</span> m = n &gt;&gt; <span class="number">1</span>;</div><div class="line">	fft(m, buffer, offset, step &lt;&lt; <span class="number">1</span>, epsilon);</div><div class="line">	fft(m, buffer, offset + step, step &lt;&lt; <span class="number">1</span>, epsilon);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k != m; ++k)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">int</span> pos = <span class="number">2</span> * step * k;</div><div class="line">		temp[k] = buffer[pos + offset] + epsilon[k * step] * buffer[pos + offset + step];</div><div class="line">		temp[k + m] = buffer[pos + offset] - epsilon[k * step] * buffer[pos + offset + step];</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i != n; ++i)</div><div class="line">		buffer[i * step + offset] = temp[i];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>epsilon</code>是事先打好的表<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_epsilon</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">double</span> pi = <span class="built_in">acos</span>(<span class="number">-1</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i != n; ++i)</div><div class="line">	&#123;</div><div class="line">		epsilon[i] = <span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt;(<span class="built_in">cos</span>(<span class="number">2.0</span> * pi * i / n), <span class="built_in">sin</span>(<span class="number">2.0</span> * pi * i / n)); </div><div class="line">		arti_epsilon[i] = conj(epsilon[i]);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="迭代实现方法"><a href="#迭代实现方法" class="headerlink" title="迭代实现方法"></a>迭代实现方法</h2><p>考察一下整个计算过程，你就会发现，如果将计算的下标都做二进制翻转：<br>比如讲0100变成0010<br>整个计算就是挨着挨着算的，从0算到1，从0,1算到2,3，从0,1,2,3算到4,5,6,7。。。<br>所以我们只需要先整理好计算的顺序，然后就可以迭代计算出来了：<br>这回是我自己写的了。。<br>预处理单位根<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">initUnitRoot</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">		unitRoot[i] = <span class="built_in">std</span>::<span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt;(<span class="built_in">cos</span>(<span class="number">2.0</span> * pi * i / n), <span class="built_in">sin</span>(<span class="number">2.0</span> * pi * i / n));</div><div class="line">		artiUnitRoot[i] = <span class="built_in">std</span>::conj(unitRoot[i]);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>二进制翻转<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">bitReverse</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">std</span>::<span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt; *x)</span> </span>&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i != n; ++i) &#123;</div><div class="line">		<span class="keyword">if</span>(i &gt; j) <span class="built_in">std</span>::swap(x[i], x[j]);</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> l = n &gt;&gt; <span class="number">1</span>; (j ^= l) &lt; l; l &gt;&gt;= <span class="number">1</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>变换<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//FFT use transform(n, x, unitRoot)</span></div><div class="line"><span class="comment">//IFFT use transform(n, x, artiUnitRoot)</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">transform</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">std</span>::<span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt; *x, <span class="built_in">std</span>::<span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt; *w)</span> </span>&#123;</div><div class="line">	bitReverse(n, x);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i &lt;&lt;= <span class="number">1</span>) </div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>, m = i &gt;&gt; <span class="number">1</span>; j &lt; n; j += i) </div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k != m; ++k) &#123;</div><div class="line">				<span class="built_in">std</span>::<span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt; z = x[j + m + k] * w[n / i * k];</div><div class="line">				x[j + m + k] = x[j + k] - z;</div><div class="line">				x[j + k] += z;</div><div class="line">			&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/傅里叶变换/" rel="tag"># 傅里叶变换</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2016/03/29/第十四届校赛初赛/" rel="next" title="第十四届校赛初赛">
+                <i class="fa fa-chevron-left"></i> 第十四届校赛初赛
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2016/07/08/谈反演和变换一/" rel="prev" title="谈反演和变换一">
+                谈反演和变换一 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是傅里叶变换？"><span class="nav-number">1.</span> <span class="nav-text">什么是傅里叶变换？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些先修的概念"><span class="nav-number">2.</span> <span class="nav-text">一些先修的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#复数"><span class="nav-number">2.1.</span> <span class="nav-text">复数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单位根"><span class="nav-number">2.2.</span> <span class="nav-text">单位根</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧拉公式"><span class="nav-number">2.3.</span> <span class="nav-text">欧拉公式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#离散傅里叶变换"><span class="nav-number">3.</span> <span class="nav-text">离散傅里叶变换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DFT"><span class="nav-number">3.1.</span> <span class="nav-text">DFT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IDFT"><span class="nav-number">3.2.</span> <span class="nav-text">IDFT</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Cooley-Tukey算法"><span class="nav-number">4.</span> <span class="nav-text">Cooley-Tukey算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法思想"><span class="nav-number">4.1.</span> <span class="nav-text">算法思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归实现方法"><span class="nav-number">4.2.</span> <span class="nav-text">递归实现方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代实现方法"><span class="nav-number">4.3.</span> <span class="nav-text">迭代实现方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

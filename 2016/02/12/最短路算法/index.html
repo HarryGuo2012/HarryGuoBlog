@@ -1,0 +1,748 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="图论," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="单源最短路单源最短路的意思就是一个起点，算出到其他点的最短路，这里介绍三种算法，bellman-ford，spfa和dijkstra
+BF算法算法思想BF是bellman_ford的简称，算法的想法非常简单，进行$|V|-1$次操作，每次操作对所有的边松弛。松弛可以形象的理解为更新值，比如有一条从$u$到$v$的边，如果$u$上的值加上边的长度小于$v$上的值，那么就更新$v$上的值。为什么这样做">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最短路算法">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2016/02/12/最短路算法/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="单源最短路单源最短路的意思就是一个起点，算出到其他点的最短路，这里介绍三种算法，bellman-ford，spfa和dijkstra
+BF算法算法思想BF是bellman_ford的简称，算法的想法非常简单，进行$|V|-1$次操作，每次操作对所有的边松弛。松弛可以形象的理解为更新值，比如有一条从$u$到$v$的边，如果$u$上的值加上边的长度小于$v$上的值，那么就更新$v$上的值。为什么这样做">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/最短路/1.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/最短路/2.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/最短路/3.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/最短路/4.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/最短路/2.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/最短路/5.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/最短路/6.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/最短路/4.jpg">
+<meta property="og:updated_time" content="2017-03-02T04:59:26.733Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="最短路算法">
+<meta name="twitter:description" content="单源最短路单源最短路的意思就是一个起点，算出到其他点的最短路，这里介绍三种算法，bellman-ford，spfa和dijkstra
+BF算法算法思想BF是bellman_ford的简称，算法的想法非常简单，进行$|V|-1$次操作，每次操作对所有的边松弛。松弛可以形象的理解为更新值，比如有一条从$u$到$v$的边，如果$u$上的值加上边的长度小于$v$上的值，那么就更新$v$上的值。为什么这样做">
+<meta name="twitter:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/最短路/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2016/02/12/最短路算法/"/>
+
+
+
+
+
+  <title> 最短路算法 | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2016/02/12/最短路算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                最短路算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-12T21:07:25+08:00">
+                2016-02-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/算法讲解/" itemprop="url" rel="index">
+                    <span itemprop="name">算法讲解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="单源最短路"><a href="#单源最短路" class="headerlink" title="单源最短路"></a>单源最短路</h1><p>单源最短路的意思就是一个起点，算出到其他点的最短路，这里介绍三种算法，bellman-ford，spfa和dijkstra</p>
+<h2 id="BF算法"><a href="#BF算法" class="headerlink" title="BF算法"></a>BF算法</h2><h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><p>BF是bellman_ford的简称，算法的想法非常简单，进行$|V|-1$次操作，每次操作对所有的边松弛。<br>松弛可以形象的理解为更新值，比如有一条从$u$到$v$的边，如果$u$上的值加上边的长度小于$v$上的值，那么就更新$v$上的值。<br>为什么这样做是对的呢？我们可以回顾整个过程，第一次操作，我们一定能将起点出去的点中的某一个点更新为最小值（这个点以后不会被更新），关于这点可以用反证法证明，如果没有一个点是更新完毕的，那么从起点到这个点必然存在一条比起点到这个点的边更短的路径，与假设矛盾。故而每次我们至少能确定一个点，所以总共需要$|V|-1$次（起点不用更新）。<br>最开始的图，0是起点<br><img src="/HarryGuoBlog/images/最短路/1.jpg" alt=""><br><a id="more"></a><br>初始化<br><img src="/HarryGuoBlog/images/最短路/2.jpg" alt=""><br>第一次松弛更新了1,2,3三个点<br><img src="/HarryGuoBlog/images/最短路/3.jpg" alt=""><br>最后全部更新好了<br><img src="/HarryGuoBlog/images/最短路/4.jpg" alt=""></p>
+<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1008611</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 1003</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> edge&#123;</div><div class="line">	<span class="keyword">int</span> to,cost;</div><div class="line">	edge(<span class="keyword">int</span> tt,<span class="keyword">int</span> cc):to(tt),cost(cc)&#123;&#125;</div><div class="line">	edge()&#123;&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAX_V];<span class="comment">//用vector存图，点的编号从1开始</span></div><div class="line"><span class="keyword">int</span> V,E;<span class="comment">//点数和边数</span></div><div class="line"><span class="keyword">int</span> d[MAX_V];<span class="comment">//最短路</span></div><div class="line"></div><div class="line"><span class="comment">//最短路算法，s是起点</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">BF</span><span class="params">(<span class="keyword">int</span> s)</span></span>&#123;</div><div class="line">	fill(d+<span class="number">1</span>,d+<span class="number">1</span>+V,INF);</div><div class="line">	d[s]=<span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;V<span class="number">-1</span>;i++)&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> u=<span class="number">1</span>;u&lt;=V;u++)</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;G[u].size();j++)&#123;</div><div class="line">				<span class="keyword">int</span> v=G[u][j].to,c=G[u][j].cost;</div><div class="line">				<span class="keyword">if</span>(d[u]+c&lt;d[v])</div><div class="line">					d[v]=d[u]+c;</div><div class="line">			&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="built_in">cin</span>&gt;&gt;V&gt;&gt;E;</div><div class="line">	<span class="keyword">while</span>(E--)&#123;</div><div class="line">		<span class="keyword">int</span> u,v,c;</div><div class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v&gt;&gt;c;</div><div class="line">		G[u].push_back(edge(v,c));</div><div class="line">	&#125;</div><div class="line">	BF(<span class="number">1</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=V;i++)</div><div class="line">		<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;d[i]&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>复杂度很明显是$O(V*E)$，在完全图的时候，会变成$O(V^3)$</p>
+<h2 id="SPFA算法"><a href="#SPFA算法" class="headerlink" title="SPFA算法"></a>SPFA算法</h2><p>SPFA算法又叫做bellman-ford队列优化，至于为啥叫SPFA我也不知道。</p>
+<h3 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h3><p>纵观整个BF算法，我们可以用宽度优先搜索来代替V-1次的暴力松弛，每次用队列头部的元素去更新其他点，如果将一个点更新成功，就将这个点加入队列，直到更新不动为止。<br>可以证明，这样做和BF本质上是一样的。但这样做有个好处，这个好处就在于我们可以记录一个点是否在队列中，如果这个点在队列中，那么我们知道这个点一定会被拿出来松弛，那么当这个点被更新的时候，我们就不用讲他加入队列了。如此，就大大改进了BF算法。</p>
+<h3 id="算法实现-1"><a href="#算法实现-1" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1008611</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 1003</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> edge&#123;</div><div class="line">	<span class="keyword">int</span> to,cost;</div><div class="line">	edge(<span class="keyword">int</span> tt,<span class="keyword">int</span> cc):to(tt),cost(cc)&#123;&#125;</div><div class="line">	edge()&#123;&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAX_V];<span class="comment">//用vector存图，点的编号从1开始</span></div><div class="line"><span class="keyword">int</span> V,E;<span class="comment">//点数和边数</span></div><div class="line"><span class="keyword">int</span> d[MAX_V];<span class="comment">//最短路</span></div><div class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;<span class="comment">//搜索用的队列</span></div><div class="line"><span class="keyword">bool</span> inQue[MAX_V];<span class="comment">//判断是否在队列中</span></div><div class="line"><span class="comment">//最短路算法，s是起点</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">SPFA</span><span class="params">(<span class="keyword">int</span> s)</span></span>&#123;</div><div class="line">	fill(d+<span class="number">1</span>,d+<span class="number">1</span>+V,INF);</div><div class="line">	d[s]=<span class="number">0</span>;</div><div class="line">	que.push(s);</div><div class="line">	inQue[s]=<span class="number">1</span>;</div><div class="line">	<span class="keyword">while</span>(que.size())&#123;</div><div class="line">		<span class="keyword">int</span> u=que.front();que.pop();</div><div class="line">		inQue[u]=<span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;G[u].size();i++)&#123;</div><div class="line">			<span class="keyword">int</span> v=G[u][i].to,c=G[u][i].cost;</div><div class="line">			<span class="keyword">if</span>(d[u]+c&lt;d[v])&#123;</div><div class="line">				d[v]=d[u]+c;</div><div class="line">				<span class="keyword">if</span>(!inQue[v])&#123;</div><div class="line">					inQue[v]=<span class="number">1</span>;</div><div class="line">					que.push(v);</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="built_in">cin</span>&gt;&gt;V&gt;&gt;E;</div><div class="line">	<span class="keyword">while</span>(E--)&#123;</div><div class="line">		<span class="keyword">int</span> u,v,c;</div><div class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v&gt;&gt;c;</div><div class="line">		G[u].push_back(edge(v,c));</div><div class="line">	&#125;</div><div class="line">	SPFA(<span class="number">1</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=V;i++)</div><div class="line">		<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;d[i]&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="算法复杂度"><a href="#算法复杂度" class="headerlink" title="算法复杂度"></a>算法复杂度</h3><p>这个算法的复杂度是个迷，据传是$O(k*E)$，其中$k$是个不大的常数。</p>
+<h2 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h2><h3 id="算法思想-2"><a href="#算法思想-2" class="headerlink" title="算法思想"></a>算法思想</h3><p>我们依旧用宽度优先搜索的角度思考BF算法，我们发现，如果我们每次都将最小的值从队列中拿出，那么拿出来的一定是已经更新好了的（同样可以用反证法证明），所以只要我们将队列变成堆，就能快速处理最短路了。<br>还是刚刚那个图，最开始将0号节点加入堆<br><img src="/HarryGuoBlog/images/最短路/2.jpg" alt=""><br>现在从堆中拿出最小的数0，用他更新1,2,3，并把1,2,3加入堆<br><img src="/HarryGuoBlog/images/最短路/5.jpg" alt=""><br>现在堆里面最小的数是2号节点，说明2号节点已经更新好了，那么用2号节点去更新其他节点<br><img src="/HarryGuoBlog/images/最短路/6.jpg" alt=""><br>最好都更新好了<br><img src="/HarryGuoBlog/images/最短路/4.jpg" alt=""></p>
+<h3 id="算法实现-2"><a href="#算法实现-2" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1008611</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 1003</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> edge&#123;</div><div class="line">	<span class="keyword">int</span> to,cost;</div><div class="line">	edge(<span class="keyword">int</span> tt,<span class="keyword">int</span> cc):to(tt),cost(cc)&#123;&#125;</div><div class="line">	edge()&#123;&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">vector</span>&lt;edge&gt; G[MAX_V];<span class="comment">//用vector存图，点的编号从1开始</span></div><div class="line"><span class="keyword">int</span> V,E;<span class="comment">//点数和边数</span></div><div class="line"><span class="keyword">int</span> d[MAX_V];<span class="comment">//最短路</span></div><div class="line"></div><div class="line"><span class="keyword">struct</span> node&#123;</div><div class="line">	<span class="keyword">int</span> u,c;</div><div class="line">	node(<span class="keyword">int</span> uu,<span class="keyword">int</span> cc):u(uu),c(cc)&#123;&#125;</div><div class="line">	node()&#123;&#125;</div><div class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> node &amp;a)<span class="keyword">const</span> &#123;</div><div class="line">		<span class="keyword">return</span> c&gt;a.c;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">priority_queue&lt;node&gt; que;</div><div class="line"><span class="comment">//最短路算法，s是起点</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span> (que.size())que.pop();</div><div class="line">    fill(d + <span class="number">1</span>, d + V + <span class="number">1</span>, INF);</div><div class="line">    que.push(node(s, <span class="number">0</span>));</div><div class="line">    d[s] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span> (que.size()) &#123;</div><div class="line">        node now = que.top();</div><div class="line">        que.pop();</div><div class="line">        <span class="keyword">int</span> u = now.u, c = now.c;</div><div class="line">        <span class="keyword">if</span> (d[u] &lt; c)<span class="keyword">continue</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[u].size(); i++) &#123;</div><div class="line">            <span class="keyword">int</span> v = G[u][i].to;</div><div class="line">            <span class="keyword">if</span> (d[v] &gt; d[u] + G[u][i].cost) &#123;</div><div class="line">                d[v] = d[u] + G[u][i].cost;</div><div class="line">                que.push(node(v, d[v]));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="built_in">cin</span>&gt;&gt;V&gt;&gt;E;</div><div class="line">	<span class="keyword">while</span>(E--)&#123;</div><div class="line">		<span class="keyword">int</span> u,v,c;</div><div class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v&gt;&gt;c;</div><div class="line">		G[u].push_back(edge(v,c));</div><div class="line">	&#125;</div><div class="line">	dijkstra(<span class="number">1</span>);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=V;i++)</div><div class="line">		<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;d[i]&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="算法复杂度-1"><a href="#算法复杂度-1" class="headerlink" title="算法复杂度"></a>算法复杂度</h3><p>由于我们至少将所有边遍历一次，所以我们需要$O(E)$的时间，堆优化使得我们在搜索时将一个$V$的复杂度降到$logV$，所以时间复杂度为$O(E+VlogV)$</p>
+<hr>
+<h1 id="多源最短路"><a href="#多源最短路" class="headerlink" title="多源最短路"></a>多源最短路</h1><p>如果我们想知道任意两个点之间的最短路，这时候可以暴力跑n次单源最短路，也可以用floyd算法</p>
+<h2 id="Floyd算法"><a href="#Floyd算法" class="headerlink" title="Floyd算法"></a>Floyd算法</h2><p>这个算法的特点就是非常好写</p>
+<h3 id="算法思想-3"><a href="#算法思想-3" class="headerlink" title="算法思想"></a>算法思想</h3><p>Floyd算法运用了动态规划的思想，对于一个最短路径(u,v)而言，我们一定是从u到了k，再从k到v。所以我们只要知道了(u,k)和(k,v)的最短路，那么我们就能得到(u,v)的最短路。<br>所以暴力枚举就好</p>
+<h3 id="算法实现-3"><a href="#算法实现-3" class="headerlink" title="算法实现"></a>算法实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_V 102</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1008611</span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> d[MAX_V][MAX_V];</div><div class="line"><span class="keyword">int</span> V,E;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="built_in">cin</span>&gt;&gt;V&gt;&gt;E;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=V;i++)</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=V;j++)</div><div class="line">			d[i][j]=(i==j?<span class="number">0</span>:INF);</div><div class="line">	<span class="keyword">while</span>(E--)&#123;</div><div class="line">		<span class="keyword">int</span> u,v,c;</div><div class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v&gt;&gt;c;</div><div class="line">		d[u][v]=c;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=V;k++)</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=V;i++)</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=V;j++)</div><div class="line">				d[i][j]=min(d[i][k]+d[k][j],d[i][j]);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=V;i++)</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=V;j++)</div><div class="line">			<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;j&lt;&lt;<span class="string">" "</span>&lt;&lt;d[i][j]&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="算法复杂度-2"><a href="#算法复杂度-2" class="headerlink" title="算法复杂度"></a>算法复杂度</h3><p>很明显，复杂度是$O(V^3)$</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/图论/" rel="tag"># 图论</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2016/01/25/积性函数与线性筛法/" rel="next" title="积性函数与线性筛法">
+                <i class="fa fa-chevron-left"></i> 积性函数与线性筛法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2016/02/16/Burnside引理和Polya定理/" rel="prev" title="Burnside引理和Polya定理">
+                Burnside引理和Polya定理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#单源最短路"><span class="nav-number">1.</span> <span class="nav-text">单源最短路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BF算法"><span class="nav-number">1.1.</span> <span class="nav-text">BF算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法思想"><span class="nav-number">1.1.1.</span> <span class="nav-text">算法思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法实现"><span class="nav-number">1.1.2.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度分析"><span class="nav-number">1.1.3.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPFA算法"><span class="nav-number">1.2.</span> <span class="nav-text">SPFA算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法思想-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">算法思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法实现-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法复杂度"><span class="nav-number">1.2.3.</span> <span class="nav-text">算法复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dijkstra算法"><span class="nav-number">1.3.</span> <span class="nav-text">Dijkstra算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法思想-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">算法思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法实现-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法复杂度-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">算法复杂度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多源最短路"><span class="nav-number">2.</span> <span class="nav-text">多源最短路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Floyd算法"><span class="nav-number">2.1.</span> <span class="nav-text">Floyd算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算法思想-3"><span class="nav-number">2.1.1.</span> <span class="nav-text">算法思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法实现-3"><span class="nav-number">2.1.2.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法复杂度-2"><span class="nav-number">2.1.3.</span> <span class="nav-text">算法复杂度</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,766 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="图像增强," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文地址：http://harryguo.me/2015/11/06/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%881%EF%BC%89-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/
+
+什么是直方图均衡化？
+为方便起见，本文前面讨论的都是黑白图像（灰度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字图像处理（1） 直方图均衡化">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2015/11/06/数字图像处理（1）-直方图均衡化/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="本文地址：http://harryguo.me/2015/11/06/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%881%EF%BC%89-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/
+
+什么是直方图均衡化？
+为方便起见，本文前面讨论的都是黑白图像（灰度">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/数字图像处理（1）/BT.png">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/数字图像处理（1）/AT.png">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/数字图像处理（1）/BadTree.png">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/数字图像处理（1）/GoodTree.png">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/数字图像处理（1）/BadRoad.png">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/数字图像处理（1）/GoodRoad.png">
+<meta property="og:updated_time" content="2017-03-02T04:59:25.461Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数字图像处理（1） 直方图均衡化">
+<meta name="twitter:description" content="本文地址：http://harryguo.me/2015/11/06/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%881%EF%BC%89-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/
+
+什么是直方图均衡化？
+为方便起见，本文前面讨论的都是黑白图像（灰度">
+<meta name="twitter:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/数字图像处理（1）/BT.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2015/11/06/数字图像处理（1）-直方图均衡化/"/>
+
+
+
+
+
+  <title> 数字图像处理（1） 直方图均衡化 | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2015/11/06/数字图像处理（1）-直方图均衡化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数字图像处理（1） 直方图均衡化
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-06T19:01:41+08:00">
+                2015-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/数字图像处理/" itemprop="url" rel="index">
+                    <span itemprop="name">数字图像处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文地址：<br><a href="http://harryguo.me/2015/11/06/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%881%EF%BC%89-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/" target="_blank" rel="external">http://harryguo.me/2015/11/06/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%EF%BC%881%EF%BC%89-%E7%9B%B4%E6%96%B9%E5%9B%BE%E5%9D%87%E8%A1%A1%E5%8C%96/</a></p>
+</blockquote>
+<h1 id="什么是直方图均衡化？"><a href="#什么是直方图均衡化？" class="headerlink" title="什么是直方图均衡化？"></a>什么是直方图均衡化？</h1><blockquote>
+<p>为方便起见，本文前面讨论的都是黑白图像（灰度图），后面会特别提及彩色图像。</p>
+</blockquote>
+<p>我们知道，一幅图像的灰度值可以看成一个随机变量，不妨设现在图片的灰度值是$r$，直方图均衡化后的灰度值是$s$。<br>$r$的概率密度函数（PDF）可能是这样一个乱七八糟的样子：<br><img src="/HarryGuoBlog/images/数字图像处理（1）/BT.png" alt="&quot;变换前概率密度&quot;"><br>这样的概率密度是我们不希望看到的，我们希望整个图像能够<strong>均匀的占据灰度的整个区间</strong>：<br><img src="/HarryGuoBlog/images/数字图像处理（1）/AT.png" alt="&quot;变换后概率密度&quot;"><br>这便是直方图均衡化。</p>
+<hr>
+<a id="more"></a>
+<h1 id="数学推理？"><a href="#数学推理？" class="headerlink" title="数学推理？"></a>数学推理？</h1><h2 id="连续空间"><a href="#连续空间" class="headerlink" title="连续空间"></a>连续空间</h2><p>对于一个转换来说，我们总是可以把他写成一个函数的形式$s=T(r)$，表示将灰度为$r$的地方都变成$T(r)$。<br>现在假设$T(r)$是个单调的函数，那么根据概率论的只是我们能够得到这样的变换关系：<br>$$p_s(s)=p_r(r)*{\left | \frac{dr}{ds} \right |}$$</p>
+<p>对上式分离变量积分有：</p>
+<p>$$s=T(r)=(L-1)\int_{0}^{r} p_r(w)dw$$</p>
+<p>这就是直方图均衡化连续空间域的转换函数。</p>
+<h2 id="离散空间"><a href="#离散空间" class="headerlink" title="离散空间"></a>离散空间</h2><p>当然一张图片不可能是连续的，所以我们要在离散空间上找寻方法来实现上述功能。</p>
+<blockquote>
+<p>积分就是求和<br>微分就是差分</p>
+</blockquote>
+<p>使用上面两个策略，我们就能获得离散时间的方法：<br>概率密度$p(r_k)=\frac{n_k}{MN}$，其中$n_k$表示第$k$级的灰度的个数。<br>那么变换函数就是：<br>$$s_k<br>=T(r_k)<br>=(L-1)<br>\sum_{j=0}^{k}<br>p(r_j)=<br>\frac{(L-1)}{MN}<br>\sum_{j=0}^{k}<br>n_j$$</p>
+<hr>
+<h1 id="效果和代码？"><a href="#效果和代码？" class="headerlink" title="效果和代码？"></a>效果和代码？</h1><p>说了这么多小伙伴们一定迫不及待想看效果了吧。</p>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">I=imread(<span class="string">'tree.png'</span>);<span class="comment">%读取一个图片</span></div><div class="line">J=histeq(I);<span class="comment">%matlab自带函数，可以实现上述的变换</span></div><div class="line">figure,imshow(I);<span class="comment">%显示原本图片</span></div><div class="line">figure,imshow(J);<span class="comment">%显示转换后的图片</span></div></pre></td></tr></table></figure>
+<h2 id="效果："><a href="#效果：" class="headerlink" title="效果："></a>效果：</h2><p>转换之前的：<br><img src="/HarryGuoBlog/images/数字图像处理（1）/BadTree.png" alt="&quot;BadTree&quot;"><br>转换之后的：<br><img src="/HarryGuoBlog/images/数字图像处理（1）/GoodTree.png" alt="&quot;GoodTree&quot;"><br>很明显可以看出图像的对比度增强了。</p>
+<hr>
+<h1 id="彩色图片"><a href="#彩色图片" class="headerlink" title="彩色图片"></a>彩色图片</h1><p>我们日常的图片当然不是黑白的，那么彩色图片又该如何处理呢？<br>想必很多小伙伴都知道彩色图片是由RGB三个分量组成的，所以，我们只需要每个分量分别处理即可。</p>
+<h2 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">I=imread(<span class="string">'BadRoad.png'</span>);<span class="comment">%读取图片</span></div><div class="line">r=I(:,:,<span class="number">1</span>);<span class="comment">%分离分量</span></div><div class="line">g=I(:,:,<span class="number">2</span>);</div><div class="line">b=I(:,:,<span class="number">3</span>);</div><div class="line">J=<span class="built_in">cat</span>(<span class="number">3</span>,histeq(r),histeq(g),histeq(b));<span class="comment">%转换并且合并</span></div><div class="line">figure,imshow(I);</div><div class="line">figure,imshow(J);</div></pre></td></tr></table></figure>
+<h2 id="效果：-1"><a href="#效果：-1" class="headerlink" title="效果："></a>效果：</h2><p>这效果好到我自己都怕。。。<br>转换之前：<br><img src="/HarryGuoBlog/images/数字图像处理（1）/BadRoad.png" alt=""><br>转换之后：<br><img src="/HarryGuoBlog/images/数字图像处理（1）/GoodRoad.png" alt=""></p>
+<hr>
+<h1 id="未谈及："><a href="#未谈及：" class="headerlink" title="未谈及："></a>未谈及：</h1><blockquote>
+<p>直方图规定化<br>局部直方图均衡化</p>
+<hr>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/图像增强/" rel="tag"># 图像增强</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/11/05/UVA-11990-Dynamic-Inversion/" rel="next" title="UVA 11990 Dynamic Inversion">
+                <i class="fa fa-chevron-left"></i> UVA 11990 Dynamic Inversion
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/11/07/深入浅出讲解卷积/" rel="prev" title="深入浅出讲解卷积">
+                深入浅出讲解卷积 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是直方图均衡化？"><span class="nav-number">1.</span> <span class="nav-text">什么是直方图均衡化？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数学推理？"><span class="nav-number">2.</span> <span class="nav-text">数学推理？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连续空间"><span class="nav-number">2.1.</span> <span class="nav-text">连续空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#离散空间"><span class="nav-number">2.2.</span> <span class="nav-text">离散空间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#效果和代码？"><span class="nav-number">3.</span> <span class="nav-text">效果和代码？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码："><span class="nav-number">3.1.</span> <span class="nav-text">代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果："><span class="nav-number">3.2.</span> <span class="nav-text">效果：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#彩色图片"><span class="nav-number">4.</span> <span class="nav-text">彩色图片</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码：-1"><span class="nav-number">4.1.</span> <span class="nav-text">代码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#效果：-1"><span class="nav-number">4.2.</span> <span class="nav-text">效果：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#未谈及："><span class="nav-number">5.</span> <span class="nav-text">未谈及：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

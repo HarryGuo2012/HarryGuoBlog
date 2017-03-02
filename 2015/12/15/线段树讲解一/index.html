@@ -1,0 +1,737 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="线段树," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="概述将区间不断二分划分所构成的树就是线段树。他的每个节点保存的是整个区间的某一段，如图所示：线段树主要用于区间的动态查询和动态修改。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线段树讲解一">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2015/12/15/线段树讲解一/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="概述将区间不断二分划分所构成的树就是线段树。他的每个节点保存的是整个区间的某一段，如图所示：线段树主要用于区间的动态查询和动态修改。">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/线段树/1.png">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/线段树/2.png">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/线段树/3.png">
+<meta property="og:updated_time" content="2017-03-02T04:59:26.523Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线段树讲解一">
+<meta name="twitter:description" content="概述将区间不断二分划分所构成的树就是线段树。他的每个节点保存的是整个区间的某一段，如图所示：线段树主要用于区间的动态查询和动态修改。">
+<meta name="twitter:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/线段树/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2015/12/15/线段树讲解一/"/>
+
+
+
+
+
+  <title> 线段树讲解一 | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2015/12/15/线段树讲解一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                线段树讲解一
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-15T16:24:55+08:00">
+                2015-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/算法讲解/" itemprop="url" rel="index">
+                    <span itemprop="name">算法讲解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>将区间不断二分划分所构成的树就是线段树。他的每个节点保存的是整个区间的某一段，如图所示：<br><img src="/HarryGuoBlog/images/线段树/1.png" alt=""><br>线段树主要用于区间的动态查询和动态修改。<br><a id="more"></a></p>
+<hr>
+<h1 id="什么地方用得到线段树"><a href="#什么地方用得到线段树" class="headerlink" title="什么地方用得到线段树"></a>什么地方用得到线段树</h1><h2 id="父区间与子区间直接依赖"><a href="#父区间与子区间直接依赖" class="headerlink" title="父区间与子区间直接依赖"></a>父区间与子区间直接依赖</h2><p>如果区间的信息可以由这个区间任意划分的两个不相交的子区间来构成，那么这就叫做父区间与子区间的直接依赖。<br>比如一段区间的和，可以随便将这个区间划分成两个不相交的子区间，然后由这两个区间的和来得到原区间的和：<br><img src="/HarryGuoBlog/images/线段树/2.png" alt=""><br>如上图的$S$可以由$A$和$B$两个子区间构成。</p>
+<h2 id="不相交的区间信息独立"><a href="#不相交的区间信息独立" class="headerlink" title="不相交的区间信息独立"></a>不相交的区间信息独立</h2><p>要使用线段树，还得保证不相交的两个区间的信息没有任何关系，如上图中，区间$A$的和与区间$B$的和没有任何关系。</p>
+<h2 id="分治的思想得到线段树"><a href="#分治的思想得到线段树" class="headerlink" title="分治的思想得到线段树"></a>分治的思想得到线段树</h2><p>如果一个问题满足上述的性质，那么我们就可分治地来处理整个问题。对于我们要操作的每个区间，我们将其分成两半，由于左边和右边的信息是独立的，所以我们递归处理左右两边，然后将得到的信息合并回去。<br>那么假如我们早已保存了某个区间的信息，那么我们就不用一直分下去了。而保存这种信息的数据结构便是线段树。</p>
+<h2 id="时间和空间复杂度"><a href="#时间和空间复杂度" class="headerlink" title="时间和空间复杂度"></a>时间和空间复杂度</h2><p>由于我们的操作是分治的处理，所以无论是询问还是修改，时间复杂度都是$O(logn)$的，由于这是一棵完全二叉树，所以为了安全起见，我们应该会需要$O(4n)$的空间。</p>
+<hr>
+<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><p>首先讲解一下怎么单点更新某个值，然后询问区间和。<br>我们首先将线段树改造成满二叉树的形式，然后从上到下，从左向右给线段树的节点编号，则如果一个节点的编号是<code>v</code>，那么它的子节点就是<code>v&lt;&lt;1</code>和<code>v&lt;&lt;1|1</code>两个编号。</p>
+<h2 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//线段树</div><div class="line">struct SegmentTree&#123;</div><div class="line">#define lchild L,m,v&lt;&lt;1</div><div class="line">#define rchild m+1,R,v&lt;&lt;1|1</div><div class="line">//每个节点</div><div class="line">	struct Node&#123;</div><div class="line">		int sum;//当前节点保存的区间和</div><div class="line">	&#125;tree[4*MAX_N];</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="向上传递信息"><a href="#向上传递信息" class="headerlink" title="向上传递信息"></a>向上传递信息</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushUp</span><span class="params">(<span class="keyword">int</span> v)</span></span>&#123;</div><div class="line">	tree[v].sum=tree[v&lt;&lt;<span class="number">1</span>].sum+tree[v&lt;&lt;<span class="number">1</span>|<span class="number">1</span>].sum;<span class="comment">//父节点的信息由两个子节点来构成</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="构建线段树"><a href="#构建线段树" class="headerlink" title="构建线段树"></a>构建线段树</h2><p>要构建整个线段树，我们应该不断递归分治构建，在叶子节点的时候复制序列的信息<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> L=<span class="number">1</span>,<span class="keyword">int</span> R=N,<span class="keyword">int</span> v=<span class="number">1</span>)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(L==R)&#123;</div><div class="line">		tree[v].sum=a[L];<span class="comment">//a是原序列，这里表示走到了叶子节点</span></div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span>&#123;</div><div class="line">		<span class="keyword">int</span> m=(L+R)&gt;&gt;<span class="number">1</span>;<span class="comment">//找到中间的位置</span></div><div class="line">		build(lchild);<span class="comment">//处理左儿子</span></div><div class="line">		build(rchild);<span class="comment">//处理右儿子</span></div><div class="line">	&#125;</div><div class="line">	pushUp(v);<span class="comment">//将左右两个儿子的信息传上来</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="更新序列中某个位置的值"><a href="#更新序列中某个位置的值" class="headerlink" title="更新序列中某个位置的值"></a>更新序列中某个位置的值</h2><p>如果我们走到了叶子节点就直接修改，然后不断<code>pushUp</code>上去就好。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> t,<span class="keyword">int</span> x,<span class="keyword">int</span> L=<span class="number">1</span>,<span class="keyword">int</span> R=N,<span class="keyword">int</span> v=<span class="number">1</span>)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(L==R)&#123;</div><div class="line">		tree[v].sum=x;<span class="comment">//走到叶子节点直接改</span></div><div class="line">		<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">int</span> m=(L+R)&gt;&gt;<span class="number">1</span>;</div><div class="line">	<span class="keyword">if</span>(t&lt;=m)update(t,x,lchild);<span class="comment">//如果在左边，就更新左儿子</span></div><div class="line">	<span class="keyword">else</span> update(t,x,rchild);<span class="comment">//如果在右边，就更新右儿子</span></div><div class="line">	pushUp(v);<span class="comment">//将左右两个儿子的信息传上来</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="查询一段区间的和"><a href="#查询一段区间的和" class="headerlink" title="查询一段区间的和"></a>查询一段区间的和</h2><p>假设我们要查询[a,b]的和，如果当前查询区间已经覆盖了整个节点，我们就将这个节点的信息直接上传，否则就去查他的子节点。如下图：<br><img src="/HarryGuoBlog/images/线段树/3.png" alt=""><br>在上图中，我们要查询[3,6]的区间和，我们就需要将区间分开去求解（红色），直到当前区间[L,R]被[3,6]完全覆盖（蓝色）<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> L=<span class="number">1</span>,<span class="keyword">int</span> R=N,<span class="keyword">int</span> v=<span class="number">1</span>)</span></span>&#123;</div><div class="line">	<span class="keyword">if</span>(a&lt;=L&amp;&amp;R&lt;=b)<span class="comment">//如果当前节点已经被[a,b]覆盖则直接返回值</span></div><div class="line">		<span class="keyword">return</span> tree[v].sum;</div><div class="line">	<span class="keyword">int</span> m=(L+R)&gt;&gt;<span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> res=<span class="number">0</span>;</div><div class="line">	<span class="keyword">if</span>(a&lt;=m)res+=query(a,b,lchild);<span class="comment">//如果查询区间和左儿子有交集，则查询左儿子</span></div><div class="line">	<span class="keyword">if</span>(b&gt;m)res+=query(a,b,rchild);<span class="comment">//如果查询区间和右儿子有交集，则查询右儿子</span></div><div class="line">	<span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="完整的单点更新，区间查询和的代码："><a href="#完整的单点更新，区间查询和的代码：" class="headerlink" title="完整的单点更新，区间查询和的代码："></a>完整的单点更新，区间查询和的代码：</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">#include&lt;iostream&gt;</div><div class="line">#include&lt;cstdio&gt;</div><div class="line">#include&lt;cstring&gt;</div><div class="line">#include&lt;algorithm&gt;</div><div class="line">#define MAX_N 100005</div><div class="line">using namespace std;</div><div class="line"></div><div class="line">int a[MAX_N];</div><div class="line">int N;</div><div class="line"></div><div class="line">struct SegmentTree&#123;</div><div class="line">#define lchild L,m,v&lt;&lt;1</div><div class="line">#define rchild m+1,R,v&lt;&lt;1|1</div><div class="line"></div><div class="line">	struct Node&#123;</div><div class="line">		int sum;</div><div class="line">	&#125;tree[4*MAX_N];</div><div class="line"></div><div class="line">	void pushUp(int v)&#123;</div><div class="line">		tree[v].sum=tree[v&lt;&lt;1].sum+tree[v&lt;&lt;1|1].sum;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	void build(int L=1,int R=N,int v=1)&#123;</div><div class="line">		if(L==R)&#123;</div><div class="line">			tree[v].sum=a[L];</div><div class="line">			return;</div><div class="line">		&#125;</div><div class="line">		else&#123;</div><div class="line">			int m=(L+R)&gt;&gt;1;</div><div class="line">			build(lchild);</div><div class="line">			build(rchild);</div><div class="line">		&#125;</div><div class="line">		pushUp(v);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	void update(int t,int x,int L=1,int R=N,int v=1)&#123;</div><div class="line">		if(L==R)&#123;</div><div class="line">			tree[v].sum=x;</div><div class="line">			return;</div><div class="line">		&#125;</div><div class="line">		int m=(L+R)&gt;&gt;1;</div><div class="line">		if(t&lt;=m)update(t,x,lchild);</div><div class="line">		else update(t,x,rchild);</div><div class="line">		pushUp(v);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	int query(int a,int b,int L=1,int R=N,int v=1)&#123;</div><div class="line">		if(a&lt;=L&amp;&amp;R&lt;=b)</div><div class="line">			return tree[v].sum;</div><div class="line">		int m=(L+R)&gt;&gt;1;</div><div class="line">		int res=0;</div><div class="line">		if(a&lt;=m)res+=query(a,b,lchild);</div><div class="line">		if(b&gt;m)res+=query(a,b,rchild);</div><div class="line">		return res;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">SegmentTree seg;</div><div class="line">int M;</div><div class="line"></div><div class="line">int main()&#123;</div><div class="line">	scanf("%d%d",&amp;N,&amp;M);</div><div class="line">	for(int i=1;i&lt;=N;i++)</div><div class="line">		scanf("%d",&amp;a[i]);</div><div class="line">	seg.build();</div><div class="line">	while(M--)&#123;</div><div class="line">		char op[2];</div><div class="line">		int l,r;</div><div class="line">		scanf("%s%d%d",op,&amp;l,&amp;r);</div><div class="line">		if(op[0]=='Q')printf("%d\n",seg.query(l,r));</div><div class="line">		else seg.update(l,r);</div><div class="line">	&#125;</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/线段树/" rel="tag"># 线段树</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/12/12/第七届ACM趣味程序设计竞赛第三场（正式赛）/" rel="next" title="第七届ACM趣味程序设计竞赛第三场（正式赛）">
+                <i class="fa fa-chevron-left"></i> 第七届ACM趣味程序设计竞赛第三场（正式赛）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/12/18/CDOJ-1260-火火柴棍数字（二）/" rel="prev" title="CDOJ 1260 火火柴棍数字（二）">
+                CDOJ 1260 火火柴棍数字（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么地方用得到线段树"><span class="nav-number">2.</span> <span class="nav-text">什么地方用得到线段树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#父区间与子区间直接依赖"><span class="nav-number">2.1.</span> <span class="nav-text">父区间与子区间直接依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不相交的区间信息独立"><span class="nav-number">2.2.</span> <span class="nav-text">不相交的区间信息独立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分治的思想得到线段树"><span class="nav-number">2.3.</span> <span class="nav-text">分治的思想得到线段树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间和空间复杂度"><span class="nav-number">2.4.</span> <span class="nav-text">时间和空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本操作"><span class="nav-number">3.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本结构"><span class="nav-number">3.1.</span> <span class="nav-text">基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向上传递信息"><span class="nav-number">3.2.</span> <span class="nav-text">向上传递信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建线段树"><span class="nav-number">3.3.</span> <span class="nav-text">构建线段树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新序列中某个位置的值"><span class="nav-number">3.4.</span> <span class="nav-text">更新序列中某个位置的值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询一段区间的和"><span class="nav-number">3.5.</span> <span class="nav-text">查询一段区间的和</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整的单点更新，区间查询和的代码："><span class="nav-number">3.6.</span> <span class="nav-text">完整的单点更新，区间查询和的代码：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

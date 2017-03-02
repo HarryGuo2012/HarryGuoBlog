@@ -1,0 +1,779 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数论," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一些先修知识群群指的是一个集合$G$，连同一种运算$\cdot$，它结合集合中的任意两个元素$a,b$，记为$a\cdot b$。群必须满足四个公理：
+
+封闭性：$\forall a,b \in G,a \cdot b \in G$结合性：$\forall a,b,c \in G,a \cdot b \cdot c = a \cdot (b \cdot c)$单位元：$\exists e \in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Burnside引理和Polya定理">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2016/02/16/Burnside引理和Polya定理/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="一些先修知识群群指的是一个集合$G$，连同一种运算$\cdot$，它结合集合中的任意两个元素$a,b$，记为$a\cdot b$。群必须满足四个公理：
+
+封闭性：$\forall a,b \in G,a \cdot b \in G$结合性：$\forall a,b,c \in G,a \cdot b \cdot c = a \cdot (b \cdot c)$单位元：$\exists e \in">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/polya/1.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/polya/2.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/polya/3.jpg">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/polya/4.jpg">
+<meta property="og:updated_time" content="2017-03-02T04:59:27.143Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Burnside引理和Polya定理">
+<meta name="twitter:description" content="一些先修知识群群指的是一个集合$G$，连同一种运算$\cdot$，它结合集合中的任意两个元素$a,b$，记为$a\cdot b$。群必须满足四个公理：
+
+封闭性：$\forall a,b \in G,a \cdot b \in G$结合性：$\forall a,b,c \in G,a \cdot b \cdot c = a \cdot (b \cdot c)$单位元：$\exists e \in">
+<meta name="twitter:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/polya/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2016/02/16/Burnside引理和Polya定理/"/>
+
+
+
+
+
+  <title> Burnside引理和Polya定理 | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2016/02/16/Burnside引理和Polya定理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Burnside引理和Polya定理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-16T19:56:10+08:00">
+                2016-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/算法讲解/" itemprop="url" rel="index">
+                    <span itemprop="name">算法讲解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一些先修知识"><a href="#一些先修知识" class="headerlink" title="一些先修知识"></a>一些先修知识</h1><h2 id="群"><a href="#群" class="headerlink" title="群"></a>群</h2><p>群指的是一个集合$G$，连同一种运算$\cdot$，它结合集合中的任意两个元素$a,b$，记为$a\cdot b$。<br>群必须满足四个公理：</p>
+<blockquote>
+<p>封闭性：$\forall a,b \in G,a \cdot b \in G$<br>结合性：$\forall a,b,c \in G,a \cdot b \cdot c = a \cdot (b \cdot c)$<br>单位元：$\exists e \in G,\forall a \in G, a \cdot e = a$<br>逆元：$\forall a,b \in G,\exists b,a \cdot b = e$</p>
+</blockquote>
+<p>比如自然数和加法就是一个群，因为无论两个自然数怎么相加，结果依然是自然数，但是自然数和减法就不构成一个群，显然，整数和减法才构成一个群。</p>
+<a id="more"></a>
+<h2 id="置换"><a href="#置换" class="headerlink" title="置换"></a>置换</h2><p>形象的理解就是字面上的意思，换位置，这是一个双射的函数$f$，我们可以用矩阵的形式写出来：<br>$$\begin{pmatrix}<br>1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\<br>2 &amp; 4 &amp; 5 &amp; 3 &amp; 1<br>\end{pmatrix}$$<br>上面这个矩阵指的是，将1这个位置的东西换到2，将2换到4，将3换到5，将4换到3，将5换到1。</p>
+<h2 id="置换群"><a href="#置换群" class="headerlink" title="置换群"></a>置换群</h2><p>对于一个$n$排列的置换集合$G$，我们定义置换的一种乘法运算，$g \cdot f$，其中$f,g \in G$。这种乘法运算是指先按照$f$进行置换，再按照$g$进行置换。例如：<br>$$f=\begin{pmatrix}1 &amp; 2 &amp; 3 &amp; 4\\ 3 &amp; 2 &amp; 4 &amp; 1\end{pmatrix}\;g=\begin{pmatrix}1 &amp; 2 &amp; 3 &amp; 4\\ 2 &amp; 4 &amp; 3 &amp; 1\end{pmatrix}$$<br>$$g \cdot f = \begin{pmatrix}1 &amp; 2 &amp; 3 &amp; 4\\ 3 &amp; 4 &amp; 1 &amp; 2\end{pmatrix}$$<br>显然，这种运算时满足<strong>结合律</strong>的：$f \cdot g \cdot h=f \cdot (g \cdot h)$，但是一般不满足交换律<br><strong>恒等置换</strong>指的是置换后不变的置换，很明显，自然排列就是恒等置换：<br>$$\iota = \begin{pmatrix}1 &amp; 2 &amp; \cdots &amp; n\\ 1 &amp; 2 &amp; \cdots &amp; n\end{pmatrix}$$<br>我们定义$f^{-1}\in G$指置换$f\in G$的<strong>逆</strong>，即进行这两种置换后，原排列不变。<br>现在我们构造了这么一个集合和运算，显然这满足了群的四个特征，所以我们称之为置换群。</p>
+<h2 id="着色"><a href="#着色" class="headerlink" title="着色"></a>着色</h2><p>定义$X$为${1,2,\cdots,n}$集合，$G$是$X$上的置换群，$X$上的着色，指的是将$X$中的每个元素指定一种颜色，$C$是$X$上的着色方案集合。<br>我们记置换$f$和着色$c$同时作用的时候为$f*c$</p>
+<hr>
+<h1 id="Burnside引理"><a href="#Burnside引理" class="headerlink" title="Burnside引理"></a>Burnside引理</h1><p>现在我们尝试计算考虑置换的情况下，不同的染色方案的个数。</p>
+<h2 id="不动点-C-f"><a href="#不动点-C-f" class="headerlink" title="不动点$C(f)$"></a>不动点$C(f)$</h2><p>令$C(f)$为，在置换$f$作用时，$C$中不变的染色方案的集合，即：<br>$$C(f)= \{c\in C,f*c=c \} $$<br>举个例子，我们现在有两种颜色，黑色和白色，去染正方形的四个角，那么在顺时针转180度的情况下，不变的染色数是4，如下图：<br><img src="/HarryGuoBlog/images/polya/1.jpg" alt=""><br><img src="/HarryGuoBlog/images/polya/2.jpg" alt=""><br><img src="/HarryGuoBlog/images/polya/3.jpg" alt=""><br><img src="/HarryGuoBlog/images/polya/4.jpg" alt=""></p>
+<h2 id="引理"><a href="#引理" class="headerlink" title="引理"></a>引理</h2><p>引理指出，对于作用在$X$上的置换$G$和着色$C$来说，不同的方案数为所有置换的不动点的平均数。即：<br>$$N(G,C)=\frac{1}{|G|}\sum_{f\in G}|C(f)|$$</p>
+<p>举个例子，我们要考察将正方形四个顶点染黑白色的不同方案数：</p>
+<table>
+<thead>
+<tr>
+<th>置换$f$</th>
+<th>不动点$C(f)$大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>旋转0度</td>
+<td>16</td>
+</tr>
+<tr>
+<td>旋转90度</td>
+<td>2</td>
+</tr>
+<tr>
+<td>旋转180度</td>
+<td>4</td>
+</tr>
+<tr>
+<td>旋转270度</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>这样一来，不同的方案数就是：$N(G,C)=\frac{16+2+4+2}{4}=6$</p>
+<h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><p>在证明之前，首先介绍一个概念：<strong>稳定核</strong> $G(c)$，这是相对于<strong>不动点</strong>$C(f)$的概念。$G(c)$指的是染色$c$作用在$X$上时，$G$中使着色不变的置换的集合，即：<br>$$G(c)= \{ f\in G,f*c=c \} $$<br>我们首先计算有多少个着色和着色$c$是等价的，如果$f*c=g*c$，并且我们知道$g=f\cdot h$，我们想知道这个$h$是从哪里来的，由于着色和置换是满足结合律的，所以：<br>$$f*c=(f\cdot h)*c=f\cdot(h*c)$$<br>$$\therefore c=h*c$$<br>所以我们知道了，$h$是来自稳定核$G(c)$，换句话说，每个在$G$中的置换$f$，我们将$h \in G(c)$乘到这个置换上，会得到$|G(c)|$个置换，并且这些置换对于$c$是等价的，所以：<br>$$与c等价的个数=\frac{|G|}{|G(c)|}$$<br>整理一下思路，我们现在得到了两个重要的东西：</p>
+<blockquote>
+<p>对于一个置换，有哪些着色不会改变，即$C(f)$<br>对于一个着色，有多少个着色和这个着色等价，即$\frac{|G|}{|G(c)|}$</p>
+</blockquote>
+<p>现在我们尝试将两个概念联系起来，我们统计一下有多少对$(f,c)$，满足$f*c=c$。<br>首先我们从置换的角度来看，每个置换$f$都有$|C(f)|$个$(f,c)$，满足$f*c=c$，所以答案显然是：<br>$$\sum_{f\in G}|C(f)|$$<br>然后我们从着色的角度看，对于着色$c$来说，$f*c=c$中$f$的集合就是$G(c)$，由刚刚的推理我们知道$|G(c)|=\frac{|G|}{与c等价的个数}$，所以答案是：<br>$$\sum_{c\in C} \frac{|G|}{与c等价的个数}$$<br>如果我们对颜色进行分类，等价的颜色归为一类，那么每个等价类会对上面的和式贡献$|G|$的量，即总共贡献$N(G,C)*|G|$。<br>所以我们得到了Burnside引理：<br>$$N(G,C)=\frac{1}{|G|}\sum_{f\in G}|C(f)|$$</p>
+<hr>
+<h1 id="Polya定理"><a href="#Polya定理" class="headerlink" title="Polya定理"></a>Polya定理</h1><p>如果明白了Burnside引理，理解polya定理是很容易的。polya定理指出了如何计算不动点$C(f)$的大小。<br>对于一个置换来说，我们可以将其分解为若干个互不干扰的置换，比如置换：<br>$$f=\begin{pmatrix}1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8\\ 6 &amp; 8 &amp; 5 &amp; 4 &amp; 1 &amp; 3 &amp; 2 &amp; 7\end{pmatrix}=[1\;6\;3\;5]\cdot[2\;8\;7]\cdot[4]$$<br>polya定理指出，对于一个置换$f$来说，其不动点的大小$|C(f)|$等于着色数的置换循环节的个数的幂，即：<br>$$|C(f)|=|C|^a$$<br>其中$a$表示循环节的个数，比如上面置换中，循环节的个数就是3。</p>
+<h2 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h2><p>想必看到这里，脑袋都快炸了，所以我就不写规规矩矩的证明了。<br>我们来脑补一下，每个循环节很明显要涂成一个颜色，不然一置换，一定会有地方改变了颜色，所以，答案显然就是polya公式了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/数论/" rel="tag"># 数论</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2016/02/12/最短路算法/" rel="next" title="最短路算法">
+                <i class="fa fa-chevron-left"></i> 最短路算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2016/02/25/二分写法讲解/" rel="prev" title="二分写法讲解">
+                二分写法讲解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一些先修知识"><span class="nav-number">1.</span> <span class="nav-text">一些先修知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#群"><span class="nav-number">1.1.</span> <span class="nav-text">群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#置换"><span class="nav-number">1.2.</span> <span class="nav-text">置换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#置换群"><span class="nav-number">1.3.</span> <span class="nav-text">置换群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#着色"><span class="nav-number">1.4.</span> <span class="nav-text">着色</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Burnside引理"><span class="nav-number">2.</span> <span class="nav-text">Burnside引理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不动点-C-f"><span class="nav-number">2.1.</span> <span class="nav-text">不动点$C(f)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引理"><span class="nav-number">2.2.</span> <span class="nav-text">引理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#证明"><span class="nav-number">2.3.</span> <span class="nav-text">证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Polya定理"><span class="nav-number">3.</span> <span class="nav-text">Polya定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#证明-1"><span class="nav-number">3.1.</span> <span class="nav-text">证明</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

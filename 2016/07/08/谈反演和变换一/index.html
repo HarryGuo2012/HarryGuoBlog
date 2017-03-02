@@ -1,0 +1,763 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数论,莫比乌斯,离散傅里叶变换,组合数学," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="从错排开始什么是错排？比如一天有$n$只咸鱼要坐座位，第$i$号咸鱼并不想做第$i$号位置，问有多少种方案？
+咸鱼怎么想？
+全部咸鱼随便排的方案数是$n!$
+排除有一只咸鱼坐在自己的位置$n!-\binom{n}{1}(n - 1)!$
+加回来两只咸鱼坐对的情况$n! - \binom{n}{1}(n - 1)! + \binom{n}{2}(n - 2)!$
+…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谈反演和变换一">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2016/07/08/谈反演和变换一/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="从错排开始什么是错排？比如一天有$n$只咸鱼要坐座位，第$i$号咸鱼并不想做第$i$号位置，问有多少种方案？
+咸鱼怎么想？
+全部咸鱼随便排的方案数是$n!$
+排除有一只咸鱼坐在自己的位置$n!-\binom{n}{1}(n - 1)!$
+加回来两只咸鱼坐对的情况$n! - \binom{n}{1}(n - 1)! + \binom{n}{2}(n - 2)!$
+…">
+<meta property="og:updated_time" content="2016-07-09T13:47:17.017Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谈反演和变换一">
+<meta name="twitter:description" content="从错排开始什么是错排？比如一天有$n$只咸鱼要坐座位，第$i$号咸鱼并不想做第$i$号位置，问有多少种方案？
+咸鱼怎么想？
+全部咸鱼随便排的方案数是$n!$
+排除有一只咸鱼坐在自己的位置$n!-\binom{n}{1}(n - 1)!$
+加回来两只咸鱼坐对的情况$n! - \binom{n}{1}(n - 1)! + \binom{n}{2}(n - 2)!$
+…">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2016/07/08/谈反演和变换一/"/>
+
+
+
+
+
+  <title> 谈反演和变换一 | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2016/07/08/谈反演和变换一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                谈反演和变换一
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-08T22:39:58+08:00">
+                2016-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/数学讲解/" itemprop="url" rel="index">
+                    <span itemprop="name">数学讲解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="从错排开始"><a href="#从错排开始" class="headerlink" title="从错排开始"></a>从错排开始</h1><h2 id="什么是错排？"><a href="#什么是错排？" class="headerlink" title="什么是错排？"></a>什么是错排？</h2><p>比如一天有$n$只咸鱼要坐座位，第$i$号咸鱼并不想做第$i$号位置，问有多少种方案？</p>
+<h2 id="咸鱼怎么想？"><a href="#咸鱼怎么想？" class="headerlink" title="咸鱼怎么想？"></a>咸鱼怎么想？</h2><ul>
+<li>全部咸鱼随便排的方案数是$n!$</li>
+<li>排除有一只咸鱼坐在自己的位置$n!-\binom{n}{1}(n - 1)!$</li>
+<li>加回来两只咸鱼坐对的情况$n! - \binom{n}{1}(n - 1)! + \binom{n}{2}(n - 2)!$</li>
+<li>…</li>
+</ul>
+<a id="more"></a>
+<h2 id="所以我们得到公式？"><a href="#所以我们得到公式？" class="headerlink" title="所以我们得到公式？"></a>所以我们得到公式？</h2><p>错排的方案数$=\sum_{k = 0}^{n}(-1)^k\binom{n}{k}(n - k)!$</p>
+<h2 id="我们换个思路？"><a href="#我们换个思路？" class="headerlink" title="我们换个思路？"></a>我们换个思路？</h2><p>令$f(n)$表示$n$只咸鱼随便坐的方案数，显然$f(n)=n!$<br>令$g(n)$表示$n$只咸鱼不坐自己位置的方案数。<br>好了，我们现在来枚举有多少只咸鱼乱坐，我们就能得到：<br>$$f(n)=\sum_{k=0}^{n}\binom{n}{k}g(k)$$<br>这是什么？？？聪明的同学已经发现，这其实就是<strong>解线性方程</strong>！！<br>令矩阵$A$为$A_{ij}=\binom{i}{j}$，$A$是长这样的：<br>$$<br>A=<br>\begin{bmatrix}<br>\binom{0}{0} &amp;  0 &amp; \cdots &amp; 0\\<br>\binom{1}{0} &amp;  \binom{1}{1} &amp; \cdots &amp; 0\\<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>\binom{n}{0} &amp;  \binom{n}{1} &amp; \cdots &amp; \binom{n}{n}<br>\end{bmatrix}<br>$$<br>这是个<strong>下三角矩阵</strong>，显然我们能够通过行变换得到其逆矩阵。<br>算来算去发现根本不好求逆矩阵，于是我们试着直接从$f$和$g$的关系出发，试着推导出$g$和$f$的关系。</p>
+<h3 id="废话一"><a href="#废话一" class="headerlink" title="废话一"></a>废话一</h3><p>我们首先观察一下$g$有什么性质，显然我们能找到一个废话般的性质：<br>$$g(n)=\sum_{k=0}^n[n=k]\binom{n}{k}g(k)$$<br>好像只要是个函数都会满足这个性质。。</p>
+<h3 id="废话二"><a href="#废话二" class="headerlink" title="废话二"></a>废话二</h3><p>再说一个废话<br>$$(1-1)^n=[n=0]$$<br>好像小学生都知道这个性质。。。</p>
+<p>好了现在我们把两个废话弄到一起<br>就能得到:<br>$$g(n)=\sum_{k=0}^n(1-1)^{n-k}\binom{n}{k}g(k)$$<br>我们把$(1-1)^{n-k}$展开：<br>$$g(n)=\sum_{k=0}^n\sum_{j=0}^{n-k}\binom{n-k}{j}(-1)^j\binom{n}{k}g(k)$$<br>两个二项式系数实际上就是说，从$n$只咸鱼中选择$k$只出来，再选$j$只的方案，我们可以先选$j$只<br>所以就变成了：<br>$$g(n)=\sum_{k=0}^n\sum_{j=0}^{n-k}\binom{n}{j}(-1)^j\binom{n-j}{k}g(k)$$<br>两个求和是求得是倒三角的区域，所以换一换求和的顺序：<br>$$g(n)=\sum_{j=0}^{n}\binom{n}{j}(-1)^j\sum_{k=0}^{n-j}\binom{n-j}{k}g(k)$$<br>回忆$f$的表达式，我们能得到：<br>$$g(n)=\sum_{j=0}^{n}\binom{n}{j}(-1)^jf(n-j)$$</p>
+<h2 id="我们就得到了传说中的二项式反演："><a href="#我们就得到了传说中的二项式反演：" class="headerlink" title="我们就得到了传说中的二项式反演："></a>我们就得到了传说中的<strong>二项式反演</strong>：</h2><p>若<br>$$f(n)=\sum_{k=0}^{n}\binom{n}{k}g(k)$$<br>则<br>$$g(n)=\sum_{k=0}^{n}(-1)^{n-k}\binom{n}{k}f(k)$$</p>
+<hr>
+<h1 id="另一个常见问题"><a href="#另一个常见问题" class="headerlink" title="另一个常见问题"></a>另一个常见问题</h1><p>经常我们会碰到这样的局面：<br>知道一个函数$f$，试图搞到一个函数$g$<br>其中$f(n)=\sum_{d|n}g(d)$</p>
+<h2 id="地球人都知道？"><a href="#地球人都知道？" class="headerlink" title="地球人都知道？"></a>地球人都知道？</h2><p>这就是<strong>莫比乌斯反演</strong><br>通过学（chang）习（shi）我们知道，其实$g(n)=\sum_{d|n}u(\frac{n}{d})f(d)$<br>其中$u$表示莫比乌斯函数（就是莫比乌斯带的那个人）<br>但这是怎么来的呢？</p>
+<h3 id="废话一-1"><a href="#废话一-1" class="headerlink" title="废话一"></a>废话一</h3><p>$$g(n)=\sum_{k|n}[\frac{n}{k}=1]g(k)$$<br>是不是和二项式的废话一很像？</p>
+<h3 id="废话二-1"><a href="#废话二-1" class="headerlink" title="废话二"></a>废话二</h3><p>$$\sum_{d|n}u(d)=[n=1]$$<br>这个还是有点小难证的。。<br>是不是和二项式的废话二很像？</p>
+<p>照着葫芦画瓢，带来带去我们就能得到莫比乌斯反演啦：<br>若<br>$$f(n)=\sum_{d|n}g(d)$$<br>则<br>$$g(n)=\sum_{d|n}u(\frac{n}{d})f(d)$$</p>
+<h2 id="怎么求莫比乌斯反演？"><a href="#怎么求莫比乌斯反演？" class="headerlink" title="怎么求莫比乌斯反演？"></a>怎么求莫比乌斯反演？</h2><h3 id="强行筛-u"><a href="#强行筛-u" class="headerlink" title="强行筛$u$"></a>强行筛$u$</h3><p>这种暴力的方法，虽然我是一直都在用，但是真的好麻烦，还要枚举约数<br>这里还是给出筛莫比乌斯函数的代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">mobius</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">memset</span>(check, <span class="literal">false</span>, <span class="keyword">sizeof</span>(check));</div><div class="line">	mu[<span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">	<span class="keyword">int</span> tot = <span class="number">0</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; i++) &#123;</div><div class="line">		<span class="keyword">if</span> (check[i]) &#123;</div><div class="line">			prime[++tot] = i;</div><div class="line">			mu[i] = <span class="number">-1</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= tot; j++) &#123;</div><div class="line">			<span class="keyword">if</span> (i * prime[j] &gt; N) <span class="keyword">break</span>;</div><div class="line">			check[i * prime[j]] = <span class="literal">true</span>;</div><div class="line">			<span class="keyword">if</span> (i % prime[j] == <span class="number">0</span>) &#123;</div><div class="line">				mu[i * prime[j]] = <span class="number">0</span>;</div><div class="line">				<span class="keyword">break</span>;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">else</span></div><div class="line">				mu[i * prime[j]] = -mu[i];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="神（yu）奇（chun）的办法"><a href="#神（yu）奇（chun）的办法" class="headerlink" title="神（yu）奇（chun）的办法"></a>神（yu）奇（chun）的办法</h3><p>其实。。问题没有那么复杂<br>我们观察一下$f$与$g$的关系：<br>$$f(n)=\sum_{d|n}g(d)=\sum_{d|n,n&gt;d}g(d)+g(n)$$<br>假设我们把$d$小于$n$的$g(d)$都处理好了，那么是不是就可以得到g(n)了呢？<br>所以我们有如下递推得到$g$的方法：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">	g[i] = f[i];</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j = i + i; j &lt;= n; j += i)</div><div class="line">		g[j] -= g[i];</div></pre></td></tr></table></figure></p>
+<p>是不是短小精悍</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/数论/" rel="tag"># 数论</a>
+          
+            <a href="/HarryGuoBlog/tags/莫比乌斯/" rel="tag"># 莫比乌斯</a>
+          
+            <a href="/HarryGuoBlog/tags/离散傅里叶变换/" rel="tag"># 离散傅里叶变换</a>
+          
+            <a href="/HarryGuoBlog/tags/组合数学/" rel="tag"># 组合数学</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2016/05/23/快速傅里叶变换/" rel="next" title="快速傅里叶变换">
+                <i class="fa fa-chevron-left"></i> 快速傅里叶变换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2016/07/09/谈反演和变换二/" rel="prev" title="谈反演和变换二">
+                谈反演和变换二 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#从错排开始"><span class="nav-number">1.</span> <span class="nav-text">从错排开始</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是错排？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是错排？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#咸鱼怎么想？"><span class="nav-number">1.2.</span> <span class="nav-text">咸鱼怎么想？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#所以我们得到公式？"><span class="nav-number">1.3.</span> <span class="nav-text">所以我们得到公式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我们换个思路？"><span class="nav-number">1.4.</span> <span class="nav-text">我们换个思路？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#废话一"><span class="nav-number">1.4.1.</span> <span class="nav-text">废话一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#废话二"><span class="nav-number">1.4.2.</span> <span class="nav-text">废话二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我们就得到了传说中的二项式反演："><span class="nav-number">1.5.</span> <span class="nav-text">我们就得到了传说中的二项式反演：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#另一个常见问题"><span class="nav-number">2.</span> <span class="nav-text">另一个常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#地球人都知道？"><span class="nav-number">2.1.</span> <span class="nav-text">地球人都知道？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#废话一-1"><span class="nav-number">2.1.1.</span> <span class="nav-text">废话一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#废话二-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">废话二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎么求莫比乌斯反演？"><span class="nav-number">2.2.</span> <span class="nav-text">怎么求莫比乌斯反演？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#强行筛-u"><span class="nav-number">2.2.1.</span> <span class="nav-text">强行筛$u$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#神（yu）奇（chun）的办法"><span class="nav-number">2.2.2.</span> <span class="nav-text">神（yu）奇（chun）的办法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

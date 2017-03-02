@@ -1,0 +1,760 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="Chinese and English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/HarryGuoBlog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/HarryGuoBlog/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="模拟,贪心,数论," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/HarryGuoBlog/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="宝贵资源这道题采用贪心的思想就好了，首先我们可以得到所有点横纵两个方向上的最大跨度，用这个最大的跨度作为边长即可框住所有的点，如下图：
+代码：https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1265.cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第七届ACM趣味程序设计竞赛第三场（正式赛）">
+<meta property="og:url" content="http://HarryGuo2012.github.io/HarryGuoBlog/2015/12/12/第七届ACM趣味程序设计竞赛第三场（正式赛）/index.html">
+<meta property="og:site_name" content="HarryGuo">
+<meta property="og:description" content="宝贵资源这道题采用贪心的思想就好了，首先我们可以得到所有点横纵两个方向上的最大跨度，用这个最大的跨度作为边长即可框住所有的点，如下图：
+代码：https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1265.cpp">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/趣味赛/3.png">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/趣味赛/4.png">
+<meta property="og:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/趣味赛/5.png">
+<meta property="og:updated_time" content="2017-03-02T04:59:27.724Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第七届ACM趣味程序设计竞赛第三场（正式赛）">
+<meta name="twitter:description" content="宝贵资源这道题采用贪心的思想就好了，首先我们可以得到所有点横纵两个方向上的最大跨度，用这个最大的跨度作为边长即可框住所有的点，如下图：
+代码：https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1265.cpp">
+<meta name="twitter:image" content="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/images/趣味赛/3.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/HarryGuoBlog/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://HarryGuo2012.github.io/HarryGuoBlog/2015/12/12/第七届ACM趣味程序设计竞赛第三场（正式赛）/"/>
+
+
+
+
+
+  <title> 第七届ACM趣味程序设计竞赛第三场（正式赛） | HarryGuo </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Chinese and English">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/HarryGuoBlog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HarryGuo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Thanks AA</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/HarryGuoBlog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/HarryGuoBlog/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/HarryGuoBlog/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2015/12/12/第七届ACM趣味程序设计竞赛第三场（正式赛）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                第七届ACM趣味程序设计竞赛第三场（正式赛）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-12T15:25:27+08:00">
+                2015-12-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/ACM/" itemprop="url" rel="index">
+                    <span itemprop="name">ACM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="宝贵资源"><a href="#宝贵资源" class="headerlink" title="宝贵资源"></a>宝贵资源</h1><p>这道题采用贪心的思想就好了，首先我们可以得到所有点横纵两个方向上的最大跨度，用这个最大的跨度作为边长即可框住所有的点，如下图：<br><img src="/HarryGuoBlog/images/趣味赛/3.png" alt=""></p>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><p><a href="https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1265.cpp" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1265.cpp</a></p>
+<hr>
+<a id="more"></a>
+<h1 id="The-Desire-of-Asuna"><a href="#The-Desire-of-Asuna" class="headerlink" title="The Desire of Asuna"></a>The Desire of Asuna</h1><h2 id="贪心的思想"><a href="#贪心的思想" class="headerlink" title="贪心的思想"></a>贪心的思想</h2><p>简单的将两个合在一起需要1的花费，这是显然的。而将三个合在一起的时候，如果其中一个只有一个环，那么就只需要1的花费。从这样的情况中，我们能够预见，如果我们能将一个链作为连接的枢纽去连接其他链，并且将这个链使用干净，那么就能减少一次花费。我们使用的链的个数越多，则减少的花费就越多，所以我们应该从小到大尽量使用链。</p>
+<h2 id="如何排序"><a href="#如何排序" class="headerlink" title="如何排序"></a>如何排序</h2><p>很多同学在大一的时候都学过冒泡，但是这是个很逗逼的排序方法。效率非常的低。有很多高效的算法，这里就不解释了。不过C++标准库STL给出了<code>sort</code>函数能够在$O(nlogn)$时间进行排序，如要排序数组<code>a</code>，长度为<code>n</code>，则用下面的语句就能从小到大排序：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sort(a,a+n);</div></pre></td></tr></table></figure></p>
+<h2 id="代码：-1"><a href="#代码：-1" class="headerlink" title="代码："></a>代码：</h2><p><a href="https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1263.cpp" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1263.cpp</a></p>
+<hr>
+<h1 id="人民币的构造"><a href="#人民币的构造" class="headerlink" title="人民币的构造"></a>人民币的构造</h1><h2 id="子问题1"><a href="#子问题1" class="headerlink" title="子问题1"></a>子问题1</h2><p>我们尝试回答这样一个问题，给出$n$张不同的纸币，可以加减，不能使用相同的纸币，不考虑运算结果是否相同，但必须大于0的前提下，有多少种组合方式。<br>由于运算出来的结果必须大于0，并且加法满足交换律，那么这是个组合问题，而不是排列问题。<br>相当于我从$n$张纸币中，任取$k$张，并从大到小排好序，再往里面塞运算符号。<br>从中取$k$张的并塞运算符号的方案数是：<br>$$C^k_n2^{k-1}$$<br>所以总方案数应当是对$k$的求和：<br>$$\sum_{k=1}^nC^k_n2^{k-1}$$<br>由二项式定理，上式与下式等价：<br>$$\sum_{k=1}^nC^k_n2^{k-1}=\frac{(1+2)^n-1}{2}=\frac{3^n-1}{2}$$</p>
+<h2 id="子问题2"><a href="#子问题2" class="headerlink" title="子问题2"></a>子问题2</h2><p>有子问题1我们知道了$n$张纸币最多能构成的方案数，但那是没有考虑运算结果是否相同，现在我们尝试回答这个问题，是否能找到$n$张纸币的组合使得上面算出的所有方案中，得到的结果都不一样。并且恰好覆盖$[1,\frac{3^n-1}{2}]$<br>这时候我们采取数学归纳法：<br>首先$n=1$的时候明显是成立的。<br>我们假设$n=k$的时候成立，即证明$n=k+1$的时候，恰好能够寻找到一个组合覆盖$[1,\frac{3^{k+1}-1}{2}]$<br>我们尝试这么解决这个问题，由于$n=k$的时候成立，那么我们沿用$n=k$的时候的组合方式，这时候，如果我们能够找到一张纸币满足规则，即能证明。<br>实际上由于我们能够使用$n=k$的时候的组合，所以我们是寻找一个$x$使得：<br>$$x-\frac{3^k-1}{2}\leqslant \frac{3^k-1}{2}+1$$<br>$$x+\frac{3^k-1}{2}\geqslant \frac{3^{k+1}-1}{2}$$<br>显然$x=3^k$，故证毕。</p>
+<h2 id="此题的结论"><a href="#此题的结论" class="headerlink" title="此题的结论"></a>此题的结论</h2><p>有了上面的论述，我们知道使用$n$张纸币，并且纸币的面值都是3的幂，那么就能最优的覆盖$[1,\frac{3^n-1}{2}]$的区间。所以我们只需要寻找这个$n$即可回答题目问题。</p>
+<h2 id="代码：-2"><a href="#代码：-2" class="headerlink" title="代码："></a>代码：</h2><p><a href="https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1264.cpp" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1264.cpp</a></p>
+<hr>
+<h1 id="奇怪的四元数"><a href="#奇怪的四元数" class="headerlink" title="奇怪的四元数"></a>奇怪的四元数</h1><p>非常好的一道题（尝试证明的话）</p>
+<h2 id="数形转换"><a href="#数形转换" class="headerlink" title="数形转换"></a>数形转换</h2><p>首先让我们将$i,j,k$看作一组空间上的正交基，通俗的将就是$(1,0,0)$，$(0,1,0)$，$(0,0,1)$，如同下图：<br><img src="/HarryGuoBlog/images/趣味赛/4.png" alt=""></p>
+<h2 id="符号叉是在干嘛"><a href="#符号叉是在干嘛" class="headerlink" title="符号叉是在干嘛"></a>符号叉是在干嘛</h2><p>不难发现，符号叉和叉积是一样的，如果一个在$xOz$平面内的向量叉乘$j$，则相当于绕着原点在$xOz$平面逆时针旋转90度：<br><img src="/HarryGuoBlog/images/趣味赛/5.png" alt=""></p>
+<h2 id="这是满足结合律的"><a href="#这是满足结合律的" class="headerlink" title="这是满足结合律的"></a>这是满足结合律的</h2><p>想想便知道，如果我们尝试采取结合律，那么相当于先将旋转的轴先旋转，这样并不会影响最后的结果，请自行脑补这个过程。</p>
+<h2 id="自己乘自己"><a href="#自己乘自己" class="headerlink" title="自己乘自己"></a>自己乘自己</h2><p>由于这是满足结合律的，自己乘自己，相当于先转90度，再转90度，所以应当取-1。</p>
+<h2 id="所以这道题"><a href="#所以这道题" class="headerlink" title="所以这道题"></a>所以这道题</h2><p>由上面的论述可知，如果我改变两个不同的向量的顺序，那么我们就能改变符号，但却无法改变叉乘出来的向量。这是由于，无论我们顺时针，还是逆时针转90度，始终会转到那个向量。<br>所以综上我们得出以下的结论</p>
+<ul>
+<li>如果算出来的是1那么答案就是0</li>
+<li>如果算出来是-1，那么除非全部一样，否则我们只用交换一组，答案是1（全部一样是-1）</li>
+<li>如果算出来是向量，那么绝对不可能变成数字，答案是-1。</li>
+</ul>
+<h2 id="代码：-3"><a href="#代码：-3" class="headerlink" title="代码："></a>代码：</h2><p><a href="https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1266.cpp" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1266.cpp</a></p>
+<hr>
+<h1 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h1><h2 id="如果只有一个瓶子有问题"><a href="#如果只有一个瓶子有问题" class="headerlink" title="如果只有一个瓶子有问题"></a>如果只有一个瓶子有问题</h2><p>如果只有一个瓶子有问题该怎么办，答案非常简单，我们只需要将瓶子编号，并按照编号1，2，3……拿就好，最后结果中靠和总和的差值就能判断是第几个。</p>
+<h2 id="这道题"><a href="#这道题" class="headerlink" title="这道题"></a>这道题</h2><p>这道题有两个瓶子，但是算法的思想是不变的，我们只要能够最后能够从差值中得到足够的信息即可。即如果最后得到的差值唯一的确定两个数。<br>换言之，我们要保证任意取两个数，他们的和是唯一的。这时候，由于需要输出字典序最小的，所以我们从先使用最小的数，维护当前一共出现了哪些和，然后每次寻找最小的数来满足从未出现的和，再更新一下所有的和即可。</p>
+<h2 id="代码：-4"><a href="#代码：-4" class="headerlink" title="代码："></a>代码：</h2><p><a href="https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1262.cpp" target="_blank" rel="external">https://github.com/HarryGuo2012/ACMCode/blob/worldLine/CDOJ/1262.cpp</a></p>
+<hr>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/HarryGuoBlog/tags/模拟/" rel="tag"># 模拟</a>
+          
+            <a href="/HarryGuoBlog/tags/贪心/" rel="tag"># 贪心</a>
+          
+            <a href="/HarryGuoBlog/tags/数论/" rel="tag"># 数论</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/12/11/Codeforces-335-div2/" rel="next" title="Codeforces #335 div2">
+                <i class="fa fa-chevron-left"></i> Codeforces #335 div2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/HarryGuoBlog/2015/12/15/线段树讲解一/" rel="prev" title="线段树讲解一">
+                线段树讲解一 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/HarryGuoBlog/images/avatar.jpg"
+               alt="Harry Guo" />
+          <p class="site-author-name" itemprop="name">Harry Guo</p>
+           
+              <p class="site-description motion-element" itemprop="description">An ACMer</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/HarryGuoBlog/archives">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Kategorien</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/HarryGuoBlog/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/HarryGuo2012" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/HarryBug" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2391246155/profile?topnav=1&wvr=6" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#宝贵资源"><span class="nav-number">1.</span> <span class="nav-text">宝贵资源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码："><span class="nav-number">1.1.</span> <span class="nav-text">代码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-Desire-of-Asuna"><span class="nav-number">2.</span> <span class="nav-text">The Desire of Asuna</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#贪心的思想"><span class="nav-number">2.1.</span> <span class="nav-text">贪心的思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何排序"><span class="nav-number">2.2.</span> <span class="nav-text">如何排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码：-1"><span class="nav-number">2.3.</span> <span class="nav-text">代码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#人民币的构造"><span class="nav-number">3.</span> <span class="nav-text">人民币的构造</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#子问题1"><span class="nav-number">3.1.</span> <span class="nav-text">子问题1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子问题2"><span class="nav-number">3.2.</span> <span class="nav-text">子问题2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#此题的结论"><span class="nav-number">3.3.</span> <span class="nav-text">此题的结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码：-2"><span class="nav-number">3.4.</span> <span class="nav-text">代码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#奇怪的四元数"><span class="nav-number">4.</span> <span class="nav-text">奇怪的四元数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数形转换"><span class="nav-number">4.1.</span> <span class="nav-text">数形转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#符号叉是在干嘛"><span class="nav-number">4.2.</span> <span class="nav-text">符号叉是在干嘛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这是满足结合律的"><span class="nav-number">4.3.</span> <span class="nav-text">这是满足结合律的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自己乘自己"><span class="nav-number">4.4.</span> <span class="nav-text">自己乘自己</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#所以这道题"><span class="nav-number">4.5.</span> <span class="nav-text">所以这道题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码：-3"><span class="nav-number">4.6.</span> <span class="nav-text">代码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Memory"><span class="nav-number">5.</span> <span class="nav-text">Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如果只有一个瓶子有问题"><span class="nav-number">5.1.</span> <span class="nav-text">如果只有一个瓶子有问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#这道题"><span class="nav-number">5.2.</span> <span class="nav-text">这道题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码：-4"><span class="nav-number">5.3.</span> <span class="nav-text">代码：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Harry Guo</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/HarryGuoBlog/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/HarryGuoBlog/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
