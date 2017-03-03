@@ -197,7 +197,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -207,7 +207,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
-            Categories
+            Kategorien
           </a>
         </li>
       
@@ -217,7 +217,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
-            About
+            Über
           </a>
         </li>
       
@@ -227,7 +227,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -260,6 +260,154 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2016/02/16/Burnside引理和Polya定理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Harry Guo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HarryGuo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/HarryGuoBlog/2016/02/16/Burnside引理和Polya定理/" itemprop="url">
+                  Burnside引理和Polya定理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-16T19:56:10+08:00">
+                2016-02-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/HarryGuoBlog/categories/算法讲解/" itemprop="url" rel="index">
+                    <span itemprop="name">算法讲解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="一些先修知识"><a href="#一些先修知识" class="headerlink" title="一些先修知识"></a>一些先修知识</h1><h2 id="群"><a href="#群" class="headerlink" title="群"></a>群</h2><p>群指的是一个集合$G$，连同一种运算$\cdot$，它结合集合中的任意两个元素$a,b$，记为$a\cdot b$。<br>群必须满足四个公理：</p>
+<blockquote>
+<p>封闭性：$\forall a,b \in G,a \cdot b \in G$<br>结合性：$\forall a,b,c \in G,a \cdot b \cdot c = a \cdot (b \cdot c)$<br>单位元：$\exists e \in G,\forall a \in G, a \cdot e = a$<br>逆元：$\forall a,b \in G,\exists b,a \cdot b = e$</p>
+</blockquote>
+<p>比如自然数和加法就是一个群，因为无论两个自然数怎么相加，结果依然是自然数，但是自然数和减法就不构成一个群，显然，整数和减法才构成一个群。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/HarryGuoBlog/2016/02/16/Burnside引理和Polya定理/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -307,7 +455,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-12T21:07:25+08:00">
                 2016-02-12
@@ -328,7 +476,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -373,7 +521,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2016/02/12/最短路算法/#more" rel="contents">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -452,7 +600,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-25T10:16:08+08:00">
                 2016-01-25
@@ -473,7 +621,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -602,7 +750,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-25T00:06:17+08:00">
                 2016-01-25
@@ -623,7 +771,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -670,7 +818,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2016/01/25/2016Camp之旅/#more" rel="contents">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -749,7 +897,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-23T23:01:50+08:00">
                 2016-01-23
@@ -770,7 +918,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -816,7 +964,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2016/01/23/乘法逆元/#more" rel="contents">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -895,7 +1043,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-01-22T16:42:23+08:00">
                 2016-01-22
@@ -916,7 +1064,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -960,7 +1108,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2016/01/22/线段树讲解二/#more" rel="contents">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -1039,7 +1187,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-18T01:15:09+08:00">
                 2015-12-18
@@ -1060,7 +1208,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1190,7 +1338,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-15T16:24:55+08:00">
                 2015-12-15
@@ -1211,7 +1359,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1255,7 +1403,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2015/12/15/线段树讲解一/#more" rel="contents">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -1334,7 +1482,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-12T15:25:27+08:00">
                 2015-12-12
@@ -1355,7 +1503,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1401,7 +1549,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2015/12/12/第七届ACM趣味程序设计竞赛第三场（正式赛）/#more" rel="contents">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -1480,7 +1628,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-11T12:03:10+08:00">
                 2015-12-11
@@ -1501,7 +1649,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">in</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1548,155 +1696,10 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/HarryGuoBlog/2015/12/11/Codeforces-335-div2/#more" rel="contents">
-              Read more &raquo;
+              Weiterlesen &raquo;
             </a>
           </div>
           <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://HarryGuo2012.github.io/HarryGuoBlog/HarryGuoBlog/2015/12/11/CDOJ-1261-被神选中的人/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Harry Guo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/HarryGuoBlog/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HarryGuo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/HarryGuoBlog/2015/12/11/CDOJ-1261-被神选中的人/" itemprop="url">
-                  CDOJ 1261 被神选中的人
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-11T00:01:09+08:00">
-                2015-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/HarryGuoBlog/categories/ACM/" itemprop="url" rel="index">
-                    <span itemprop="name">ACM</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="模型的转换"><a href="#模型的转换" class="headerlink" title="模型的转换"></a>模型的转换</h1><h2 id="尝试回答这样的问题："><a href="#尝试回答这样的问题：" class="headerlink" title="尝试回答这样的问题："></a>尝试回答这样的问题：</h2><p>现在我有三个球，其中一个抽中就会游戏结束，其中一个抽中了就会中奖，另外一个抽中了会再来一次。那么中奖的概率是多少呢？怎么看待这个问题是解决问题的关键，如果从每一步的决策上来看，似乎是和1/3有关的一个无穷级数。但是我们这样想，<strong>来一次的球一点用都没有</strong>，这是显然的，那么概率自然就是1/2</p>
-<h2 id="让球可以消失"><a href="#让球可以消失" class="headerlink" title="让球可以消失"></a>让球可以消失</h2><p>现在这个问题变成了，如果有多个再来一次的球，并且抽中再来一次的球后，这个球就会消失。那么最后中奖的概率是多少呢？很明显也是1/2，这是由于就算会减少，但是也并没有影响到中奖和结束的球，可从上面的模型中得到这个结论。</p>
-<hr>
-<h1 id="和此题的关系"><a href="#和此题的关系" class="headerlink" title="和此题的关系"></a>和此题的关系</h1><p>此题中抽中神卡，就和球消失一样，并没有影响魔卡。所以我们能得出，神卡在这个游戏中并没有什么卵用。所以这个游戏只和魔卡有关系。</p>
-<h2 id="如果-m-是奇数"><a href="#如果-m-是奇数" class="headerlink" title="如果$m$是奇数"></a>如果$m$是奇数</h2><p>很明显，无论怎样都会留下奇数张的魔卡，那么方块A必死。</p>
-<h2 id="如果-m-是偶数"><a href="#如果-m-是偶数" class="headerlink" title="如果$m$是偶数"></a>如果$m$是偶数</h2><p>这时候如果要让方片A活下来，那么方片A必须最后被抽走。我们可以把魔卡排成一排，然后将方片A插入，如果方片A要活下来，当且仅当方片A在最后，而插入的总可能性有$m+1$种，所以最后的概率的倒数就是$m+1$</p>
-
-          
         
       
     </div>
@@ -1775,8 +1778,8 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/HarryGuoBlog/archives">
-                <span class="site-state-item-count">47</span>
-                <span class="site-state-item-name">posts</span>
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">Artikel</span>
               </a>
             </div>
           
@@ -1785,7 +1788,7 @@
             <div class="site-state-item site-state-categories">
               <a href="/HarryGuoBlog/categories">
                 <span class="site-state-item-count">6</span>
-                <span class="site-state-item-name">categories</span>
+                <span class="site-state-item-name">Kategorien</span>
               </a>
             </div>
           
@@ -1794,7 +1797,7 @@
             <div class="site-state-item site-state-tags">
               <a href="/HarryGuoBlog/tags">
                 <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">tags</span>
+                <span class="site-state-item-name">Tags</span>
               </a>
             </div>
           
@@ -1891,7 +1894,7 @@
 
 
 <div class="powered-by">
-  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
